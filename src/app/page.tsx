@@ -1,9 +1,14 @@
+import { SectionContato } from "@/components/SectionContato";
+import { SectionProdutos } from "@/components/SectionProdutos";
+import { SectionSlogan } from "@/components/SectionSlogan";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
-      <h1>teste</h1>
+      <SectionSlogan />
+      <SectionProdutos />
+      <SectionContato />
     </>
   );
 }

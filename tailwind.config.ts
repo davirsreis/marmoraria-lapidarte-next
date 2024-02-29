@@ -8,7 +8,8 @@ const config: Config = {
   ],
   theme: {
     backgroundImage: {
-      'img_bg_slogan': "url('../assets/slogan-fundo.jpg')"
+      'img_bg_slogan': "url('../assets/slogan-fundo.jpg')",
+      'img_bg_fundo_contato': "url('../assets/fundo-contato.png')"
     },
     extend: {
       colors: {
