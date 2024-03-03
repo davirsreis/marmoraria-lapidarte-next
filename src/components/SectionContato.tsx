@@ -18,8 +18,8 @@ export function SectionContato() {
         <div className="w-[400px] flex flex-col justify-center">
           <CardContato>
             <div className="flex flex-col justify-evenly items-center h-full">
-              <p className="text-2xl text-white font-semibold mb-2 text-center">(61) 99999-9999</p>
-              <p className="text-2xl text-white font-semibold text-center">vendas@marmorarialapidarte.com</p>
+              <p className="text-2xl text-white font-semibold mb-2 text-center p-4 rounded-md bg-opacity-gray">(61) 99999-9999</p>
+              <p className="text-2xl text-white font-semibold text-center p-4 rounded-md bg-opacity-gray">vendas@marmorarialapidarte.com</p>
             </div>
           </CardContato>
         </div>

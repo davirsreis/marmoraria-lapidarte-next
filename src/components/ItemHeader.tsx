@@ -5,6 +5,6 @@ interface ItemHeaderProps {
 
 export function ItemHeader(props: ItemHeaderProps) {
   return (
-    <a className="text-gray-900 hover:text-gray-600" href={props.url}>{props.name}</a>
+    <a className="text-primary-blue text-xl hover:text-second-blue" href={props.url}>{props.name}</a>
   )
 }
