@@ -4,7 +4,7 @@ interface CardContatoProps {
 
 export function CardContato(props: CardContatoProps) {
   return (
-    <div className="text-white shadow-lg rounded-lg h-full">
+    <div className="text-white">
       {props.children}
     </div>
   )

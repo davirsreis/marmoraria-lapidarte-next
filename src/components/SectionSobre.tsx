@@ -1,6 +1,6 @@
-import { Container } from "./Container";
 import { ItemSobre } from "./ItemSobre";
 
+import LogoLapidarte from '@/assets/logoLapidarte.png'
 import imgMesaMarmore from '@/assets/mesaMarmore.jpg'
 import IconCozinha from '@/assets/iconCozinha.png'
 import IconBanheiro from '@/assets/iconBanheiro.png'
@@ -11,12 +11,23 @@ const IconMesa = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><pa
 
 export function SectionSobre() {
   return (
-    <section className="w-full h-[1031px] flex items-center bg-third-neutral">
-      <Container>
-        <div className="flex-1 max-w-[564px] pt-32">
-          <span className="block text-primary-orange text-sm font-bold uppercase mb-9">serviços exclusivos</span>
+    <section className="w-full flex flex-col bg-third-neutral py-[100px]">
+      <div className="flex flex-col items-center pb-20">
+        <Image
+          src={LogoLapidarte}
+          alt="Logo Lapidarte"
+          className="w-[120px] h-[120px]"
+        />
+        <h1 className="text-[32px]">
+          Marmoraria Lapidarte
+        </h1>
+        <p>Brasília-DF</p>
+      </div>
+      {/* <Container customClass="justify-evenly"> */}
+      <div className="flex flex-col lgPlus:flex-row lgPlus:justify-evenly items-center w-full mx-auto">
+        <div className="w-[564px]">
           <h2 className="text-primary-gray text-[48px] font-bold leading-tight mb-6">Melhores soluções para o seu projeto</h2>
-          <p className="max-w-[564px] mb-16 text-second-gray">Atendimento e serviço especializado, oferecendo uma grande diversidade de mármores.</p>
+          <p className="mb-16 text-second-gray">Atendimento e serviço especializado, oferecendo uma grande diversidade de mármores.</p>
           <ul className="flex flex-col items-start gap-9">
             <ItemSobre img={IconCozinha} text="Bancadas de cozinha" customClass="pb-9 border-b-[1px] border-opacity-gray" />
             <ItemSobre img={IconBanheiro} text="Banheiros" customClass="pb-9 border-b-[1px] border-opacity-gray" />
@@ -24,12 +35,15 @@ export function SectionSobre() {
             <ItemSobre img={IconPiso} text="Pisos e revestimentos" />
           </ul>
         </div>
-      </Container>
-      <div className="w-[555px] h-[500px] rounded-[10px] cover">
-        <Image
-          src={imgMesaMarmore}
-          alt="Imagem mesa de mármore" />
+        <div className="mt-20 lgPlus:mt-0">
+          <Image
+            src={imgMesaMarmore}
+            alt="Imagem mesa de mármore"
+            className="max-w-[555px] max-h-[500px] w-[555px] h-[500px] rounded-[10px]"
+          />
+        </div>
       </div>
+      {/* </Container> */}
     </section>
   )
 }

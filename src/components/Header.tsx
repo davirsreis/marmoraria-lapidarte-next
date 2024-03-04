@@ -9,11 +9,10 @@ export function Header() {
 
   return (
     <header className="w-full h-20 bg-primary-neutral flex items-center justify-evenly px-6">
-      <div className="w-[60px] h-[60px]">
+      <div className="min-w-[60px] min-h-[60px] w-[60px] h-[60px]">
         <Image
           src={LogoLapidarte}
           alt="Logo Lapidarte"
-          className="w-15 h-15"
         />
       </div>
       <div className="flex items-center gap-4 lg:gap-16">
