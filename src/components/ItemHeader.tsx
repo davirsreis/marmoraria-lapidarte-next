@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 interface ItemHeaderProps {
   name: string
   url: string
@@ -5,6 +7,8 @@ interface ItemHeaderProps {
 
 export function ItemHeader(props: ItemHeaderProps) {
   return (
-    <a className="text-primary-blue text-xl hover:text-second-blue" href={props.url}>{props.name}</a>
+    <Link href={props.url} passHref>
+      <span className="text-primary-blue text-xl hover:text-second-blue">{props.name}</span>
+    </Link>
   )
 }
