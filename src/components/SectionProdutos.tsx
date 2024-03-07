@@ -30,9 +30,10 @@ export function SectionProdutos() {
           path="carrara" />
       </div>
       <Botao
-        text="VER TODOS OS PRODUTOS"
-        customClass="mt-20"
-      />
+        cor="azul"
+        customClass="mt-20">
+        VER TODOS OS PRODUTOS
+      </Botao>
     </section>
   )
 }

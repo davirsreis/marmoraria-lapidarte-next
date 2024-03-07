@@ -8,12 +8,13 @@ export default class ColecaoProduto implements ProdutoRepositorio {
     toFirestore(produto: Produto) {
       return {
         nome: produto.nome,
+        pedra: produto.pedra,
         linkImg: produto.linkImg
       }
     },
     fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): Produto {
       const dados = snapshot.data(options)
-      return new Produto(dados.nome, dados.linkImg, snapshot.id)
+      return new Produto(dados.nome, dados.pedra, dados.linkImg, snapshot.id)
     }
   }
 

@@ -13,9 +13,10 @@ export function SectionContato() {
           <p className="text-[20px] text-white leading-relaxed font-bold text-justify">Nossa equipe está pronta para te atender. Fale conosco utilizando um dos contatos abaixo ou utilize nosso formulário para enviar os detalhes do seu projeto e receber seu orçamento.</p>
           <div className="flex justify-center items-center pt-[70px]">
             <Botao
-              text="SOLICITAR ORÇAMENTO"
-              customClass="w-[350px]"
-            />
+              cor="azul"
+              customClass="w-[350px]">
+              SOLICITAR ORÇAMENTO
+            </Botao>
           </div>
         </div>
         <div className="w-[564px] h-[300px] flex flex-col justify-center items-center gap-10">

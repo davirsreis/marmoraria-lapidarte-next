@@ -19,6 +19,7 @@ const config: Config = {
         'second-neutral': '#FFEFF1',
         'third-neutral': '#F6F3EF',
         'fourth-neutral': '#F4EEE5',
+        'fifth-neutral': '#FFDFB0',
         'opacity-neutral': 'rgba(255, 255, 255, 0.1)',
         'primary-orange': '#FF7D00',
         'second-orange': '#78290F',
