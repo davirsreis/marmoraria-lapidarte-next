@@ -27,6 +27,7 @@ const config: Config = {
         'opacity-gray': 'rgba(0, 0, 0, 0.3)',
         'opacity-20-neutral': 'rgba(255, 236, 209, 0.2)',
         'opacity-60-neutral': 'rgba(255, 236, 209, 0.6)',
+        'opacity-20-blue': 'rgba(0, 21, 36, 0.2)',
       },
       screens: {
         'lgPlus': '1200px',

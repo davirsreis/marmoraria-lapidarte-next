@@ -17,8 +17,8 @@ export function Header() {
       </div>
       <div className="flex items-center gap-4 lg:gap-16">
         <ItemHeader name="HOME" url="/" />
-        <ItemHeader name="PRODUTOS" url="/gerenciamento" />
-        <ItemHeader name="ORÇAMENTO" url="/orcamento" />
+        <ItemHeader name="PRODUTOS" url="/produtos" />
+        <ItemHeader name="ORÇAMENTO" url="/solicitar-orcamento" />
       </div>
       <div className="flex gap-2">
         <div className="h-7 w-7">
