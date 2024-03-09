@@ -2,7 +2,7 @@ import Produto from "../../core/Produto"
 import { IconeEdit, IconeTrash } from "./Icones"
 
 interface TabelaProps {
-  produtos: Produto[]
+  produtos?: Produto[]
   produtoSelecionado?: (produto: Produto) => void
   produtoExcluido?: (produto: Produto) => void
 }
@@ -13,9 +13,9 @@ export default function Tabela(props: TabelaProps) {
 
   function renderizarCabecalho() {
     const thClass = "text-left p-4 text-white"
+
     return (
       <tr>
-        {/* <th className={thClass}>Código</th> */}
         <th className={thClass}>Nome</th>
         <th className={thClass}>Pedra</th>
         <th className={thClass}>linkImg</th>
@@ -29,7 +29,6 @@ export default function Tabela(props: TabelaProps) {
       const tdClass = "text-left p-4 truncate max-w-[100px] md:max-w-[200px] lg:max-w-[300px]"
       return (
         <tr key={produto.id} className={`${i % 2 === 0 ? 'bg-fifth-neutral' : 'bg-primary-neutral'}`}>
-          {/* <td className={tdClass}>{produto.id}</td> */}
           <td className={tdClass}>{produto.nome}</td>
           <td className={tdClass}>{produto.pedra}</td>
           <td className={tdClass}>{produto.linkImg}</td>

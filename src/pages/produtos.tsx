@@ -6,9 +6,9 @@ import useProdutos from "@/hooks/useProdutos";
 export default function Produtos() {
   const { produto, produtos } = useProdutos()
   const listaProdutos: string[] = [
-    'Marmores',
-    'Granitos',
-    'Quartzs'
+    'Marmore',
+    'Granito',
+    'Quartzo'
   ]
 
   return (
@@ -39,7 +39,7 @@ export default function Produtos() {
         return (
           <section key={i} className={`py-[120px] ${i % 2 === 0 ? '' : 'bg-third-neutral'}`}>
             <h2 className="text-center text-[40px] uppercase font-semibold pb-[120px]">{itemProduto}</h2>
-            <div className="flex justify-evenly">
+            <div className="flex justify-center">
               <ExibirProdutos produtos={produtosFiltrados} tipoPedra={itemProduto} />
             </div>
           </section>

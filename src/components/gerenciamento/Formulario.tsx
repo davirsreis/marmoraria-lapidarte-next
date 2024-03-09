@@ -15,6 +15,8 @@ export default function Formulario(props: FormularioProps) {
   const [pedra, setPedra] = useState(props.produto?.pedra ?? '')
   const [linkImg, setLinkImg] = useState(props.produto?.linkImg ?? '')
 
+  const pedras = ['Marmore', 'Granito', 'Quartzo']
+
   return (
     <>
       <div className="w-[500px] bg-primary-blue mt-[52px] flex justify-center items-center rounded-t-lg">
@@ -22,10 +24,11 @@ export default function Formulario(props: FormularioProps) {
       </div>
       <div className="flex flex-col w-[500px] bg-primary-neutral p-10 rounded-b-lg border border-opacity-gray">
         {id ? (
-          <Entrada somenteLeitura texto="Código" valor={id} className="mb-5" />
+          <Entrada somenteLeitura disabled texto="Código" valor={id} className="mb-5" />
         ) : false}
         <Entrada texto="Nome" placeHolder="Digite o nome" valor={nome} valorMudou={setNome} className="mb-5" />
-        <Entrada texto="Pedra" placeHolder="Digite o tipo de pedra" valor={pedra} valorMudou={setPedra} className="mb-5" />
+        {/* <Entrada texto="Pedra" placeHolder="Digite o tipo de pedra" valor={pedra} valorMudou={setPedra} className="mb-5" /> */}
+        <Entrada texto="Pedra" isSelection selections={pedras} placeHolder="Digite o tipo de pedra" valor={pedra} valorMudou={setPedra} className="mb-5" />
         <Entrada texto="LinkImg" placeHolder="Digite o link da imagem" valor={linkImg} valorMudou={setLinkImg} />
         <div className=" flex justify-end mt-5 gap-2">
           <Botao cor="verde" customClass="w-[100px]"

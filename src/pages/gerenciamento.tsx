@@ -15,13 +15,15 @@ export default function Gerenciamento() {
         {tabelaVisivel ? (
           <>
             <span className="text-[32px] font-semibold mb-[30px]">Produtos registrados</span>
-            <Botao
-              cor="custom"
-              onClick={novoProduto}
-              customClass="bg-fifth-neutral hover:border-white p-2 border border-opacity-gray text-black font-bold"
-            >
-              Adicionar item
-            </Botao>
+            <div className="flex gap-4">
+              <Botao
+                cor="custom"
+                onClick={novoProduto}
+                customClass="w-[150px] bg-fifth-neutral hover:border-white p-2 border border-opacity-gray text-black font-bold"
+              >
+                Registrar item
+              </Botao>
+            </div>
             <Layout className="mt-4 min-w-[500px]">
               <Tabela produtos={produtos} produtoSelecionado={selecionarProduto} produtoExcluido={excluirProduto} />
             </Layout>
@@ -33,6 +35,7 @@ export default function Gerenciamento() {
               produtoMudou={salvarProduto}
               cancelado={() => exibirTabela()}
             />
+            <Tabela produtos={produtos} produtoSelecionado={selecionarProduto} produtoExcluido={excluirProduto} />
           </>
         }
       </section>
