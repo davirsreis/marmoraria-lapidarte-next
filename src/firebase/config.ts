@@ -1,6 +1,8 @@
+import { initializeApp } from 'firebase/app';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore'
+import 'firebase/compat/storage'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -10,4 +12,5 @@ if (!firebase.apps.length) {
   })
 }
 
+export const storage = firebase.app().storage(process.env.NEXT_PUBLIC_FIREBASE_BUCKET_APP);
 export default firebase

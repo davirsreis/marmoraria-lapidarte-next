@@ -1,7 +1,7 @@
 interface EntradaProps {
-  tipo?: 'text' | 'number' | 'textarea'
-  texto: string;
-  valor: any
+  tipo?: 'text' | 'number' | 'textarea' | 'file'
+  texto?: string;
+  valor?: any
   somenteLeitura?: boolean
   className?: string
   placeHolder?: string

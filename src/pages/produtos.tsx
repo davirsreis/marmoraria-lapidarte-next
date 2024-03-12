@@ -31,7 +31,14 @@ export default function Produtos() {
         </div>
       </section>
       {listaProdutos.map((itemProduto, i) => {
-        const produtosFiltrados = produtos.filter(produto => produto.pedra === itemProduto);
+        const produtosFiltrados = produtos.filter(produto => {
+          if (Array.isArray(produto.pedra)) {
+            return produto.pedra.includes(itemProduto);
+          } else {
+            return produto.pedra === itemProduto;
+          }
+        });
+
         if (produtosFiltrados.length === 0) {
           return null;
         }

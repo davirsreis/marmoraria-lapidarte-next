@@ -7,6 +7,7 @@ interface EntradaFormProps {
   textarea?: boolean
   multiple?: boolean
   onChange?: any
+  valorMudou?: (valor: any) => void
 }
 
 export function EntradaForm(props: EntradaFormProps) {
@@ -15,14 +16,15 @@ export function EntradaForm(props: EntradaFormProps) {
     ? <textarea
       value={props.valor}
       placeholder={props.placeholder}
-      className={`${style}`} />
+      className={`${style}`}
+      onChange={e => props.valorMudou?.(e.target.value)} />
     : <input
       id={props.id}
       type={props.tipo}
       value={props.valor}
       placeholder={props.placeholder}
       multiple={props.multiple}
-      onChange={props.onChange}
+      onChange={e => props.valorMudou?.(e.target.value)}
       className={`${style}`} />
   return (
     conteudo
