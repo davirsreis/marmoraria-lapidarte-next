@@ -35,7 +35,6 @@ export default function Gerenciamento() {
               produtoMudou={salvarProduto}
               cancelado={() => exibirTabela()}
             />
-            <Tabela produtos={produtos} produtoSelecionado={selecionarProduto} produtoExcluido={excluirProduto} />
           </>
         }
       </section>

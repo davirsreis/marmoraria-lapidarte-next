@@ -14,7 +14,7 @@ export default function Produtos() {
   return (
     <>
       <section className="flex flex-col w-full bg-third-neutral">
-        <h2 className="text-[44px] font-semibold text-center pt-[120px]">CONHEÇA NOSSOS PRODUTOS!</h2>
+        <h2 className="text-[44px] font-semibold text-center pt-[60px]">CONHEÇA NOSSOS PRODUTOS!</h2>
         <div className="flex flex-col items-center gap-20 lg:flex-row lg:justify-evenly py-[120px]">
           <div className="w-[450px] h-[450px] flex flex-col justify-center items-center bg-fourth-neutral border border-bg-opacity-20-blue rounded-[10px]">
             <span className="text-[38px] font-semibold text-primary-blue">Mármore</span>
@@ -37,7 +37,7 @@ export default function Produtos() {
         }
 
         return (
-          <section key={i} className={`py-[120px] ${i % 2 === 0 ? '' : 'bg-third-neutral'}`}>
+          <section key={i} className={`py-[120px] ${i % 2 === 0 ? 'bg-fourth-neutral' : 'bg-third-neutral'}`}>
             <h2 className="text-center text-[40px] uppercase font-semibold pb-[120px]">{itemProduto}</h2>
             <div className="flex justify-center">
               <ExibirProdutos produtos={produtosFiltrados} tipoPedra={itemProduto} />
