@@ -33,9 +33,10 @@ export default class ColecaoProduto implements ProdutoRepositorio {
   }
 
   async obterTodos(): Promise<Produto[]> {
-    const query = await this.colecao().get()
-    return query.docs.map(doc => doc.data()) ?? []
-  }
+    // const query = await this.colecao().orderBy('pedra', 'desc').orderBy('nome').get();
+    const query = await this.colecao().get();
+    return query.docs.map(doc => doc.data()) ?? [];
+  }  
 
   private colecao() {
     return firebase.

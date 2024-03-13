@@ -17,8 +17,8 @@ export default function Tabela(props: TabelaProps) {
     return (
       <tr>
         <th className={thClass}>Nome</th>
-        <th className={thClass}>Pedra</th>
-        <th className={thClass}>linkImg</th>
+        <th className={thClass}>Tipo de pedra</th>
+        <th className={thClass}>Imagem</th>
         {exibirAcoes ? <th className="p-4 text-white">Ações</th> : false}
       </tr>
     )
@@ -26,17 +26,18 @@ export default function Tabela(props: TabelaProps) {
 
   function renderizarDados() {
     return props.produtos?.map((produto, i) => {
-      const tdClass = "text-left p-4 truncate max-w-[100px] md:max-w-[200px] lg:max-w-[300px]"
+      const tdClass = "truncate max-w-[100px] md:max-w-[200px] lg:max-w-[300px]";
       return (
         <tr key={produto.id} className={`${i % 2 === 0 ? 'bg-fifth-neutral' : 'bg-primary-neutral'}`}>
-          <td className={tdClass}>{produto.nome}</td>
-          <td className={tdClass}>{produto.pedra}</td>
-          <td className={tdClass}>{produto.linkImg}</td>
-          {exibirAcoes ? renderizarAcoes(produto) : false}
+          <td className={`${tdClass} text-left p-4`}>{produto.nome}</td>
+          <td className={`${tdClass} text-left p-4`}>{produto.pedra}</td>
+          <td className={`${tdClass} flex justify-center items-center`}><img src={produto.linkImg} className="h-[52px] w-[52px]" alt="" /></td>
+          {exibirAcoes && <td>{renderizarAcoes(produto)}</td>}
         </tr>
-      )
-    })
+      );
+    });
   }
+
 
   function renderizarAcoes(produto: Produto) {
     const style = `
@@ -45,14 +46,14 @@ export default function Tabela(props: TabelaProps) {
       bg-white hover:bg-gray-100
     `
     return (
-      <td className="flex justify-center">
+      <div className={`flex justify-center`}>
         {props.produtoSelecionado ? (
           <button onClick={() => props.produtoSelecionado?.(produto)} className={`text-green-600 ${style}`}>{IconeEdit}</button>
         ) : false}
         {props.produtoExcluido ? (
           <button onClick={() => props.produtoExcluido?.(produto)} className={`text-red-500 ${style}`}>{IconeTrash}</button>
         ) : false}
-      </td>
+      </div>
     )
   }
 

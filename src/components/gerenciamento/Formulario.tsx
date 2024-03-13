@@ -4,6 +4,7 @@ import Produto from "../../core/Produto";
 import { Botao } from "../Botao";
 import { storage } from "@/firebase/config";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { CardProduto } from "../CardProduto";
 
 interface FormularioProps {
   produto: Produto
@@ -15,9 +16,9 @@ export default function Formulario(props: FormularioProps) {
   const id = props.produto?.id ?? null
   const [nome, setNome] = useState('')
   const [pedra, setPedra] = useState<string[]>([])
-  const [linkImg, setLinkImg] = useState('')
   const [imgURL, setImgURL] = useState('');
   const [progressPorcent, setPorgessPorcent] = useState(0);
+  const [alterandoImagem, setAlterandoImagem] = useState(true);
 
   const pedras = ['Marmore', 'Granito', 'Quartzo']
 
@@ -26,40 +27,52 @@ export default function Formulario(props: FormularioProps) {
     if (props.produto) {
       setNome(props.produto.nome);
       setPedra(props.produto.pedra);
-      setLinkImg(props.produto.linkImg);
       setImgURL(props.produto.linkImg);
     }
   }, [props.produto]);
 
 
+  const handleAlterandoImagem = (event: any) => {
+    event.preventDefault();
+    setAlterandoImagem(false)
+  }
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    const file = event.target[2]?.files[0];
-    if (!file) return;
 
-    const pedraSelecionada = pedra.length > 0 ? pedra : ['Marmore'];
-    const storageRef = ref(storage, `images/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    // Verifica se não há um id ou se está alterando a imagem
+    if (!id || !alterandoImagem) {
+      var aux = 3;
+      if (!id) { aux = 2 }
+      const file = event.target[aux]?.files[0];
+      if (!file) return;
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setPorgessPorcent(progress);
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImgURL(downloadURL);
-          props.produtoMudou?.(new Produto(nome, pedraSelecionada, downloadURL, id))
-        });
-      }
-    );
+      const storageRef = ref(storage, `images/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setPorgessPorcent(progress);
+        },
+        (error) => {
+          alert(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImgURL(downloadURL);
+            props.produtoMudou?.(new Produto(nome, pedra, downloadURL, id))
+          });
+        }
+      );
+    } else {
+      props.produtoMudou?.(new Produto(nome, pedra, imgURL, id));
+    }
   };
+
 
   return (
     <>
@@ -68,14 +81,23 @@ export default function Formulario(props: FormularioProps) {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col w-[500px] bg-primary-neutral p-10 rounded-b-lg border border-opacity-gray">
-          {/* {id ? (
-            <Entrada somenteLeitura disabled texto="Código" valor={id} className="mb-5" />
-          ) : false} */}
           <Entrada texto="Nome" placeHolder="Digite o nome" valor={nome} valorMudou={setNome} className="mb-5" />
           <Entrada texto="Pedra" isSelection selections={pedras} placeHolder="Digite o tipo de pedra" valor={pedra} valorMudou={setPedra} className="mb-5" />
-          <Entrada tipo="file" />
+          {id
+            ? <div className="flex flex-col justify-center items-center">
+              <span className="font-bold py-2">Imagem</span>
+              <div className="h-[200px] w-[200px]">
+                <img src={imgURL} alt="Imagem" />
+              </div>
+              <button className="p-2 underline" onClick={handleAlterandoImagem}>Dejesa alterar a imagem?</button>
+              {alterandoImagem
+                ? null
+                : <Entrada tipo="file" disabled={alterandoImagem} />
+              }
+
+            </div>
+            : <Entrada tipo="file" />}
           {!imgURL && <p>{progressPorcent}%</p>}
-          {imgURL && <img src={imgURL} alt="Imagem" height={200} />}
           <div className=" flex justify-end mt-5 gap-2">
             <Botao cor="verde" customClass="w-[100px]">
               {id ? 'Alterar' : 'Salvar'}

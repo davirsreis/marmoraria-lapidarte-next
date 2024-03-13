@@ -14,8 +14,6 @@ interface EntradaProps {
 
 export default function Entrada(props: EntradaProps) {
 
-  const tipoPedras = ['Marmore', 'Granito']
-
   const style = `
   border border-opacity-gray rounded-lg
   focus:outline-none bg-fourth-neutral px-4 py-2
@@ -28,11 +26,23 @@ export default function Entrada(props: EntradaProps) {
       </label>
       {props.isSelection
         ?
-        <select className={style} onChange={e => props.valorMudou?.(e.target.value)}>
+        <select
+          className={style}
+          value={props.isSelection ? (Array.isArray(props.valor) ? props.valor[0] : props.valor) : ''}
+          onChange={e => props.valorMudou?.(e.target.value)}
+        >
+          <option value="" hidden>
+            Selecione uma opção
+          </option>
           {props.selections?.map((selection, i) => (
-            <option>{selection}</option>
+            <option key={i} value={selection}>
+              {selection}
+            </option>
           ))}
         </select>
+
+
+
         :
         <input
           type={props.tipo ?? 'text'}
@@ -43,7 +53,6 @@ export default function Entrada(props: EntradaProps) {
           className={style}
           disabled={props.disabled}
         />
-
       }
 
     </div>

@@ -3,6 +3,7 @@ import { Botao } from "./Botao";
 import { CardContato } from "./CardContato";
 
 import LogoLapidarte from '@/assets/logoLapidarte.png'
+import Link from "next/link";
 
 export function SectionContato() {
   return (
@@ -12,11 +13,13 @@ export function SectionContato() {
           <h1 className="text-[38px] text-primary-blue font-semibold mb-4 text-center bg-opacity-60-neutral rounded-[10px]">Fale com nossos consultores</h1>
           <p className="text-[20px] text-white leading-relaxed font-bold text-justify">Nossa equipe está pronta para te atender. Fale conosco utilizando um dos contatos abaixo ou utilize nosso formulário para enviar os detalhes do seu projeto e receber seu orçamento.</p>
           <div className="flex justify-center items-center pt-[70px]">
-            <Botao
-              cor="azul"
-              customClass="w-[350px]">
-              SOLICITAR ORÇAMENTO
-            </Botao>
+            <Link href={"solicitar-orcamento"} passHref>
+              <Botao
+                cor="azul"
+                customClass="w-[350px]">
+                SOLICITAR ORÇAMENTO
+              </Botao>
+            </Link>
           </div>
         </div>
         <div className="w-[564px] h-[300px] flex flex-col justify-center items-center gap-10">

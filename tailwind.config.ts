@@ -31,6 +31,7 @@ const config: Config = {
       },
       screens: {
         'lgPlus': '1200px',
+        'lgUltra': '1400px',
       },
     },
   },

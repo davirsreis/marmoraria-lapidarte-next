@@ -4,6 +4,7 @@ import Formulario from "@/components/gerenciamento/Formulario"
 import Layout from "@/components/gerenciamento/Layout"
 import Tabela from "@/components/gerenciamento/Tabela"
 import useProdutos from "@/hooks/useProdutos"
+import { ordenarProdutos } from "@/functions/Auxiliares"
 
 export default function Gerenciamento() {
   const { produto, produtos, selecionarProduto, excluirProduto, novoProduto, salvarProduto, tabelaVisivel, exibirTabela } = useProdutos()
@@ -25,7 +26,7 @@ export default function Gerenciamento() {
               </Botao>
             </div>
             <Layout className="mt-4 min-w-[500px]">
-              <Tabela produtos={produtos} produtoSelecionado={selecionarProduto} produtoExcluido={excluirProduto} />
+              <Tabela produtos={ordenarProdutos(produtos)} produtoSelecionado={selecionarProduto} produtoExcluido={excluirProduto} />
             </Layout>
           </>
         ) :
