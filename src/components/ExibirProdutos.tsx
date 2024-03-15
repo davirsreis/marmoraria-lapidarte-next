@@ -1,6 +1,5 @@
 import Produto from "@/core/Produto";
 import { CardProduto } from "./CardProduto";
-import useProdutos from "@/hooks/useProdutos";
 
 interface ExibirProdutosProps {
   tipoPedra?: string

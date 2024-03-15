@@ -1,5 +1,3 @@
-import Produto from "@/core/Produto"
-
 interface CardProdutoProps {
   nome: string
   path: string

@@ -50,3 +50,20 @@ export const ordenarProdutos = (produtos: any) => {
 export const redirecionarParaLogin = (rota: string) => {
   useRouter().push(rota);
 }
+
+export async function consultarArquivoJSON() {
+  try {
+    const response = await fetch('/api/consultarProdutos');
+
+    if (response.ok) {
+      const data = await response.json();
+
+      // setDadosArquivoJSON(data);
+      return data;
+    } else {
+      console.error('Erro ao consultar o arquivo JSON:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Erro ao consultar o arquivo JSON:', error);
+  }
+}

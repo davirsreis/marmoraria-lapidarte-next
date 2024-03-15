@@ -1,5 +1,4 @@
 import { ItemSobre } from "./ItemSobre";
-
 import LogoLapidarte from '@/assets/logoLapidarte.png'
 import imgMesaMarmore from '@/assets/mesaMarmore.jpg'
 import IconCozinha from '@/assets/iconCozinha.png'

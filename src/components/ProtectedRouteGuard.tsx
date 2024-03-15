@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { auth } from '@/firebase/config';
+import { Slash } from './Slash';
 
 interface ProtectedRouteGuardProps {
   children?: any
@@ -25,7 +26,7 @@ const ProtectedRouteGuard = (props: ProtectedRouteGuardProps) => {
   }, []);
 
   if (!authChecked) {
-    return null;
+    return <Slash />;
   }
 
   return <>{props.children}</>;

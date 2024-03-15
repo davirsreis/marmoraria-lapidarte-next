@@ -1,8 +1,5 @@
-import Image from "next/image";
 import { Botao } from "./Botao";
-import { CardContato } from "./CardContato";
 
-import LogoLapidarte from '@/assets/logoLapidarte.png'
 import Link from "next/link";
 
 export function SectionContato() {

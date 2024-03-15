@@ -1,8 +1,4 @@
-import { ItemSobre } from "./ItemSobre";
-
-import Image from "next/image";
 import { CardProduto } from "./CardProduto";
-import carraraImg from '@/assets/marmores/carrara.jpg'
 import { Botao } from "./Botao";
 import Link from "next/link";
 
