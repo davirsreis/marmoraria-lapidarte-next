@@ -4,7 +4,6 @@ import Produto from "../../core/Produto";
 import { Botao } from "../Botao";
 import { storage } from "@/firebase/config";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { CardProduto } from "../CardProduto";
 
 interface FormularioProps {
   produto: Produto
@@ -40,7 +39,6 @@ export default function Formulario(props: FormularioProps) {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    // Verifica se não há um id ou se está alterando a imagem
     if (!id || !alterandoImagem) {
       var aux = 3;
       if (!id) { aux = 2 }

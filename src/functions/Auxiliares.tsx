@@ -1,12 +1,16 @@
-import { ref } from "firebase/storage";
-import Link from "next/link"
-import { redirect } from "next/navigation";
+import fs from 'fs';
+import path from 'path';
+import ColecaoProduto from '../firebase/db/ColecaoProduto';
+import { useRouter } from "next/router";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { useState } from 'react';
+import firebase from 'firebase/compat/app';
+import { ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
+import { storage } from "@/firebase/config";
+import useProdutos from '@/hooks/useProdutos';
 
 export const formatarTelefone = (valor: any) => {
-  // Remove qualquer caractere que não seja número
   const numeroApenasDigitos = valor.replace(/\D/g, '');
-
-  // Formata o número no formato (99) 9999-9999
   const numeroFormatado = numeroApenasDigitos.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
 
   return numeroFormatado;
@@ -28,23 +32,21 @@ export function whatsAppSubmit(nome: string, telefone: string, email: string, de
 
 export const ordenarProdutos = (produtos: any) => {
   return produtos.sort((a: any, b: any) => {
-    // Verificar se a.pedra e b.pedra são strings
     const pedraA = typeof a.pedra === 'string' ? a.pedra : '';
     const pedraB = typeof b.pedra === 'string' ? b.pedra : '';
-    
+
     // Ordenar pela pedra em ordem decrescente
     const comparacaoPedra = pedraB.localeCompare(pedraA);
     if (comparacaoPedra !== 0) {
       return comparacaoPedra;
     }
     // Se as pedras forem iguais, ordenar pelo nome em ordem alfabética
-    // Certifique-se de tratar os casos de maiúsculas/minúsculas para garantir a ordenação correta
     const nomeA = a.nome.toLowerCase();
     const nomeB = b.nome.toLowerCase();
     return nomeA.localeCompare(nomeB);
   });
 };
 
-
-
-
+export const redirecionarParaLogin = (rota: string) => {
+  useRouter().push(rota);
+}

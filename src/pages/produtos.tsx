@@ -1,10 +1,10 @@
 import { ApresentacaoPedra } from "@/components/ApresentacaoPedra";
-import { Botao } from "@/components/Botao";
-import { CardProduto } from "@/components/CardProduto";
 import { ExibirProdutos } from "@/components/ExibirProdutos";
 import useProdutos from "@/hooks/useProdutos";
+import { useState, useEffect } from "react";
 
 export default function Produtos() {
+  const [dadosArquivoJSON, setDadosArquivoJSON] = useState<any[]>([]);
   const { produtos } = useProdutos()
   const listaProdutos: string[] = [
     'Marmore',
@@ -18,6 +18,27 @@ export default function Produtos() {
     "Quartzo": "Quartzos"
   };
 
+
+  useEffect(() => {
+    consultarArquivoJSON();
+  }, []);
+
+  async function consultarArquivoJSON() {
+    try {
+      const response = await fetch('/api/consultarProdutos');
+
+      if (response.ok) {
+        const data = await response.json();
+
+        setDadosArquivoJSON(data);
+      } else {
+        console.error('Erro ao consultar o arquivo JSON:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao consultar o arquivo JSON:', error);
+    }
+  }
+
   return (
     <>
       <section className="flex flex-col w-full bg-third-neutral">
@@ -29,8 +50,9 @@ export default function Produtos() {
           <ApresentacaoPedra nome="Quartzos" texto="Os quartzos são a definição de praticidade e estilo refinado. Com sua composição única de resina e partículas de quartzo natural, esses materiais oferecem uma solução versátil para projetos de design de interiores contemporâneos." />
         </div>
       </section>
+
       {listaProdutos.map((itemProduto, i) => {
-        const produtosFiltrados = produtos.filter(produto => {
+        const produtosFiltrados = dadosArquivoJSON.filter(produto => {
           if (Array.isArray(produto.pedra)) {
             return produto.pedra.includes(itemProduto);
           } else {
