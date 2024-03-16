@@ -8,6 +8,7 @@ import ProtectedRouteGuard from "@/components/ProtectedRouteGuard";
 
 import { ProdutoProvider } from "../components/context/ProdutoContext";
 import Login from "./login";
+import { FooterButton } from "@/components/FooterButton";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Header />
       <Component {...pageProps} />
       <Footer />
+      <FooterButton />
     </ProdutoProvider>
   );
 }

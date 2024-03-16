@@ -1,13 +1,10 @@
+import Link from 'next/link';
 import { auth } from './config';
 
 const loginComEmailESenha = async (email, password) => {
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-      console.log('Usuário logado!!');
-      console.log(user);
-      // ...
+      // var user = userCredential.user;
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -15,6 +12,20 @@ const loginComEmailESenha = async (email, password) => {
       console.log(`Ocorreu um erro: ${errorCode, errorMessage}`);
     });
 }
+
+const logout = () => {
+  auth.signOut().then(() => {
+  }).catch((error) => {
+    console.log(`Error: ${error}`);
+  });
+}
+
+export {
+  auth,
+  loginComEmailESenha,
+  logout
+}
+
 
 // const registrarComEmailESenha = async (email, password) => {
 //   auth.createUserWithEmailAndPassword(email, password)
@@ -31,25 +42,3 @@ const loginComEmailESenha = async (email, password) => {
 //       // ..
 //     });
 // }
-
-const logout = () => {
-  const user = auth.currentUser;
-  console.log(user);
-  auth.signOut().then(() => {
-    const user = auth.currentUser;
-    console.log('Sign-out successful.');
-    console.log(user);
-
-  }).catch((error) => {
-    // An error happened.
-    console.log(`Error: ${error}`);
-  });
-}
-
-
-
-export {
-  auth,
-  loginComEmailESenha,
-  logout
-}

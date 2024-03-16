@@ -3,6 +3,7 @@ import { Botao } from "./Botao";
 interface ApresentacaoPedraProps {
   nome: string
   texto: string
+  onClick?: any
 }
 
 export function ApresentacaoPedra(props: ApresentacaoPedraProps) {
@@ -11,7 +12,7 @@ export function ApresentacaoPedra(props: ApresentacaoPedraProps) {
       <span className="text-[38px] font-semibold text-primary-blue">{props.nome}</span>
       <div className="w-[390px] py-2 border-b-[1px] border-opacity-gray"></div>
       <span className="w-[390px] text-[20px] h-[200px] text-justify">{props.texto}</span>
-      <Botao customClass="mt-[60px]" cor="azul">Consultar opções</Botao>
+      <Botao customClass="mt-[60px]" cor="azul" onClick={props.onClick}>Consultar opções</Botao>
     </div>
   );
 }

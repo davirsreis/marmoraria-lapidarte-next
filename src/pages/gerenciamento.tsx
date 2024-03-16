@@ -4,24 +4,27 @@ import Layout from "@/components/gerenciamento/Layout"
 import Tabela from "@/components/gerenciamento/Tabela"
 import useProdutos from "@/hooks/useProdutos"
 import { ordenarProdutos } from "@/functions/Auxiliares"
-import { useRouter } from "next/router"
 import ColecaoProduto from "@/firebase/db/ColecaoProduto"
 import { Header } from "@/components/Header"
+import { logout } from "@/firebase/autentication"
 
 export default function Gerenciamento() {
-  const router = useRouter();
-
   const { produto, produtos, selecionarProduto, excluirProduto, novoProduto, salvarProduto, tabelaVisivel, exibirTabela } = useProdutos()
   const colecaoProduto = new ColecaoProduto();
 
-  // Função para enviar o arquivo JSON
   const enviarArquivoJSON = async () => {
     await colecaoProduto.enviarArquivoJSON();
   }
 
   return (
     <>
-    <Header />
+      <Header />
+      <div className="w-full text-right p-4">
+        <button className="" onClick={logout}>
+          Desconectar
+        </button>
+      </div>
+
       <section className="w-full flex flex-col items-center py-[30px]">
         {tabelaVisivel ? (
           <>

@@ -5,23 +5,26 @@ import { IconeAtencao } from "@/components/icons";
 import AuthInput from "@/components/auth/AuthInput";
 import LogoLapidarte from '@/assets/logoLapidarte2.png'
 import Image from "next/image";
+import { Botao } from "@/components/Botao";
 
 export default function Login() {
 
-  const [erro, setErro] = useState(null)
+  const [erro, setErro] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  function exibirErro(msg: any, tempo = 5) {
-    setErro(msg)
-    setTimeout(() => setErro(null), tempo * 1000)
+  function exibirErro(msg: string | null, tempo = 5) {
+    setErro(msg);
+    if (msg !== null) {
+      setTimeout(() => setErro(null), tempo * 1000);
+    }
   }
 
   async function submeter() {
     try {
-      await loginComEmailESenha(email, senha)
+      await loginComEmailESenha(email, senha);
     } catch (e) {
-      exibirErro(e?.message ?? 'Ocorreu um erro inesperado')
+      exibirErro(e instanceof Error ? e.message : 'Ocorreu um erro inesperado');
     }
   }
 
@@ -50,16 +53,16 @@ export default function Login() {
           Entre com a sua conta
         </h1>
 
-        {erro ? (
+        {erro && (
           <div className={`
-        flex items-center
-        bg-red-400 text-white py-3 px-5 my-2
-        border border-red-700 rounded-lg
-      `}>
+            flex items-center
+            bg-red-400 text-white py-3 px-5 my-2
+            border border-red-700 rounded-lg
+          `}>
             {IconeAtencao()}
             <span className={`ml-3`}>{erro}</span>
           </div>
-        ) : false}
+        )}
 
         <AuthInput
           label="Email"
@@ -75,12 +78,9 @@ export default function Login() {
           valorMudou={setSenha}
           obrigatorio
         />
-        <button onClick={submeter} className={
-          `w-full bg-indigo-500 hover:bg-indigo-400
-        text-white rounded-lg px-4 py-3 mt-6
-        `}>
+        <Botao cor="azul" onClick={submeter} customClass="w-full mt-6">
           Entrar
-        </button>
+        </Botao>
       </div>
     </div>
   )

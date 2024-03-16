@@ -3,7 +3,7 @@ import { ExibirProdutos } from "@/components/ExibirProdutos";
 import { Slash } from "@/components/Slash";
 import { ProdutoContext } from "@/components/context/ProdutoContext";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 
 export default function Produtos() {
   const [dadosProdutos, setDadosProdutos] = useState<any[]>([]);
@@ -21,6 +21,16 @@ export default function Produtos() {
     "Quartzo": "Quartzos"
   };
 
+  const marmoreRef = useRef<HTMLDivElement | null>(null);
+  const granitoRef = useRef<HTMLDivElement | null>(null);
+  const quartzoRef = useRef<HTMLDivElement | null>(null);
+
+  const refs: { [key: string]: React.RefObject<HTMLDivElement> } = {
+    "Mármores": marmoreRef,
+    "Granitos": granitoRef,
+    "Quartzos": quartzoRef
+  };
+
   useEffect(() => {
     if (dados !== undefined) {
       setDadosProdutos(dados);
@@ -33,12 +43,12 @@ export default function Produtos() {
         ? <Slash />
         : <>
           <section className="flex flex-col w-full bg-third-neutral">
-            <h2 className="text-[44px] font-semibold text-center pt-[60px]">CONHEÇA NOSSOS PRODUTOS!</h2>
+            <h2 className="text-[44px] font-semibold text-center pt-[120px]">CONHEÇA NOSSOS PRODUTOS!</h2>
 
             <div className="flex flex-col items-center gap-10 lgUltra:gap-1 lgUltra:flex-row lg:justify-evenly py-[120px]">
-              <ApresentacaoPedra nome="Mármores" texto="O mármore, sinônimo de requinte, é ideal para criar ambientes sofisticados. Com sua elegância atemporal, é perfeito para bancadas de cozinha, revestimentos de banheiro e pisos luxuosos." />
-              <ApresentacaoPedra nome="Granitos" texto="Robusto e versátil, o granito é a escolha ideal para ambientes que exigem durabilidade e beleza. Perfeito para bancadas de cozinha, pisos de alta circulação e revestimentos externos, proporcionando um toque de elegância e resistência." />
-              <ApresentacaoPedra nome="Quartzos" texto="Os quartzos são a definição de praticidade e estilo refinado. Com sua composição única de resina e partículas de quartzo natural, esses materiais oferecem uma solução versátil para projetos de design de interiores contemporâneos." />
+              <ApresentacaoPedra nome="Mármores" texto="O mármore, sinônimo de requinte, é ideal para criar ambientes sofisticados. Com sua elegância atemporal, é perfeito para bancadas de cozinha, revestimentos de banheiro e pisos luxuosos." onClick={() => marmoreRef.current && marmoreRef.current.scrollIntoView({ behavior: "smooth" })} />
+              <ApresentacaoPedra nome="Granitos" texto="Robusto e versátil, o granito é a escolha ideal para ambientes que exigem durabilidade e beleza. Perfeito para bancadas de cozinha, pisos de alta circulação e revestimentos externos, proporcionando um toque de elegância e resistência." onClick={() => granitoRef.current && granitoRef.current.scrollIntoView({ behavior: "smooth" })}/>
+              <ApresentacaoPedra nome="Quartzos" texto="Os quartzos são a definição de praticidade e estilo refinado. Com sua composição única de resina e partículas de quartzo natural, esses materiais oferecem uma solução versátil para projetos de design de interiores contemporâneos." onClick={() => quartzoRef.current && quartzoRef.current.scrollIntoView({ behavior: "smooth" })}/>
             </div>
           </section>
 
@@ -59,8 +69,10 @@ export default function Produtos() {
               return null;
             }
 
+            const referencia = refs[nomePedras[itemProduto]];
+
             return (
-              <section key={i} className={`py-[120px] ${i % 2 === 0 ? 'bg-fourth-neutral' : 'bg-third-neutral'}`}>
+              <section key={i} ref={referencia} className={`py-[120px] ${i % 2 === 0 ? 'bg-fourth-neutral' : 'bg-third-neutral'}`}>
                 <h2 className="text-center text-[40px] uppercase font-semibold pb-[120px]">{nomePedras[itemProduto]}</h2>
                 <div className="flex justify-center">
                   <ExibirProdutos produtos={produtosFiltrados} tipoPedra={itemProduto} />

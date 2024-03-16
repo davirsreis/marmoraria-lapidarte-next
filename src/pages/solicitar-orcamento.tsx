@@ -1,6 +1,6 @@
 import { Botao } from "@/components/Botao";
 import { EntradaForm } from "@/components/EntradaForm";
-import { formatarTelefone, whatsAppSubmit } from "@/functions/Auxiliares";
+import { formatarTelefone, whatsAppSubmitForm } from "@/functions/Auxiliares";
 import { useState } from "react";
 
 export default function Orcamento() {
@@ -17,12 +17,11 @@ export default function Orcamento() {
   };
 
   function enviarMensagem() {
-    whatsAppSubmit(nome, numeroTelefone, email, descricao);
-    console.log('Enviando mensagem');
+    whatsAppSubmitForm(nome, numeroTelefone, email, descricao);
   }
 
   return (
-    <section className="py-[80px]">
+    <section className="pb-[80px] pt-[120px]">
       <h2 className="text-[44px] font-semibold text-center pb-[80px]">Solicite já o seu orçamento</h2>
       <form className="flex flex-col justify-center items-center gap-4 pb-8">
         <EntradaForm valor={nome} valorMudou={setNome} tipo="text" placeholder="Seu nome" />

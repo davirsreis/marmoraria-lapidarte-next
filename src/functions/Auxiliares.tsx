@@ -16,7 +16,18 @@ export const formatarTelefone = (valor: any) => {
   return numeroFormatado;
 };
 
-export function whatsAppSubmit(nome: string, telefone: string, email: string, descricao: string, arquivo?: any) {
+export function whatsAppSubmit(mensagem: string) {
+  const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
+  var url = "https://wa.me/" + numeroLoja + "?text="
+    + mensagem
+
+  //var url = "https://web.whatsapp.com/send?phone=" + numeroLoja + "&text=" + mensagem
+
+
+  window.open(url, '_blank');
+}
+
+export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string) {
   const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
 
   var url = "https://wa.me/" + numeroLoja + "?text="

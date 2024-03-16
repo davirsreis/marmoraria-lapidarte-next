@@ -56,7 +56,7 @@ export default class ColecaoProduto implements ProdutoRepositorio {
 
   async enviarArquivoJSON() {
     try {
-      const produtos = await this.obterTodos(); // Obter os produtos do Firebase
+      const produtos = await this.obterTodos();
       const dadosFormatados = produtos.map(produto => ({
         id: produto.id,
         nome: produto.nome,
@@ -75,7 +75,6 @@ export default class ColecaoProduto implements ProdutoRepositorio {
 
       console.log('Arquivo JSON enviado com sucesso. Link de download:', downloadURL);
 
-      // Retornar o link de download
       return downloadURL;
     } catch (error) {
       console.error('Erro ao enviar arquivo JSON:', error);
