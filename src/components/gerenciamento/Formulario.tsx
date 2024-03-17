@@ -4,6 +4,7 @@ import Produto from "../../core/Produto";
 import { Botao } from "../Botao";
 import { storage } from "@/firebase/config";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import Image from "next/image";
 
 interface FormularioProps {
   produto: Produto
@@ -85,7 +86,7 @@ export default function Formulario(props: FormularioProps) {
             ? <div className="flex flex-col justify-center items-center">
               <span className="font-bold py-2">Imagem</span>
               <div className="h-[200px] w-[200px]">
-                <img src={imgURL} alt="Imagem" />
+                <Image src={imgURL} alt="Imagem" />
               </div>
               <button className="p-2 underline" onClick={handleAlterandoImagem}>Dejesa alterar a imagem?</button>
               {alterandoImagem

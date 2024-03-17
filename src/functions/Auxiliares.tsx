@@ -1,14 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-import ColecaoProduto from '../firebase/db/ColecaoProduto';
-import { useRouter } from "next/router";
-import { NextApiRequest, NextApiResponse } from 'next';
-import { useState } from 'react';
-import firebase from 'firebase/compat/app';
-import { ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
-import { storage } from "@/firebase/config";
-import useProdutos from '@/hooks/useProdutos';
-
 export const formatarTelefone = (valor: any) => {
   const numeroApenasDigitos = valor.replace(/\D/g, '');
   const numeroFormatado = numeroApenasDigitos.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
@@ -20,9 +9,6 @@ export function whatsAppSubmit(mensagem: string) {
   const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
   var url = "https://wa.me/" + numeroLoja + "?text="
     + mensagem
-
-  //var url = "https://web.whatsapp.com/send?phone=" + numeroLoja + "&text=" + mensagem
-
 
   window.open(url, '_blank');
 }
@@ -58,10 +44,6 @@ export const ordenarProdutos = (produtos: any) => {
   });
 };
 
-export const redirecionarParaLogin = (rota: string) => {
-  useRouter().push(rota);
-}
-
 export async function consultarArquivoJSON() {
   try {
     const response = await fetch('/api/consultarProdutos');
@@ -69,7 +51,6 @@ export async function consultarArquivoJSON() {
     if (response.ok) {
       const data = await response.json();
 
-      // setDadosArquivoJSON(data);
       return data;
     } else {
       console.error('Erro ao consultar o arquivo JSON:', response.statusText);

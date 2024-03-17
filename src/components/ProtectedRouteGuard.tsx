@@ -23,7 +23,7 @@ const ProtectedRouteGuard = (props: ProtectedRouteGuardProps) => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [router]);
 
   if (!authChecked) {
     return <Slash />;

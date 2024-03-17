@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import ProdutoRepositorio from "../core/ProdutoRepositorio"
 import Produto from "../core/Produto"
 import ColecaoProduto from "../firebase/db/ColecaoProduto"
 import useTabelaOuForm from "./useTabelaOuForm"
 
 export default function useProdutos() {
-  const repo: ProdutoRepositorio = new ColecaoProduto()
+  const repo: ProdutoRepositorio = useMemo(() => new ColecaoProduto(), []);
 
   const { tabelaVisivel, exibirTabela, exibirFormulario } = useTabelaOuForm()
 
   const [produto, setProduto] = useState<Produto>(Produto.vazio())
   const [produtos, setProdutos] = useState<Produto[]>([])
 
-  useEffect(obterTodos, [])
+  useEffect(obterTodos, [exibirTabela, repo])
 
   function obterTodos() {
     repo.obterTodos().then(produtos => {

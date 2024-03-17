@@ -38,7 +38,7 @@ export default function Login() {
         console.log('User is signed out');
       }
     });
-  }, [])
+  }, [router])
 
   return (
     <div className={`flex flex-col h-screen items-center justify-center`}>
