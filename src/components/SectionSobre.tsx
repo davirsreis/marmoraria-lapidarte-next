@@ -25,7 +25,7 @@ export function SectionSobre() {
       {/* <Container customClass="justify-evenly"> */}
       <div className="flex flex-col lgPlus:flex-row lgPlus:justify-evenly items-center w-full mx-auto">
         <div className="w-[564px]">
-          <h2 className="text-primary-gray text-[48px] font-bold leading-tight mb-6">Melhores soluções para o seu projeto</h2>
+          <h2 className="text-primary-gray text-[48px] font-semibold leading-tight mb-6">Melhores soluções para o seu projeto</h2>
           <p className="mb-16 text-second-gray">Atendimento e serviço especializado, oferecendo uma grande diversidade de mármores.</p>
           <ul className="flex flex-col items-start gap-9">
             <ItemSobre img={IconCozinha} text="Bancadas de cozinha" customClass="pb-9 border-b-[1px] border-opacity-gray" />

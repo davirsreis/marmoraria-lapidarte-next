@@ -1,12 +1,13 @@
 interface EntradaFormProps {
   id?: string
   tipo?: 'text' | 'email' | 'textarea' | 'file' | 'tel'
-  valor?: string
+  valor?: any
   placeholder?: string
   customClass?: string
   textarea?: boolean
   multiple?: boolean
   onChange?: any
+  accept?: string
   valorMudou?: (valor: any) => void
 }
 
@@ -23,6 +24,7 @@ export function EntradaForm(props: EntradaFormProps) {
       type={props.tipo}
       value={props.valor}
       placeholder={props.placeholder}
+      accept={props.accept}
       multiple={props.multiple}
       onChange={e => props.valorMudou?.(e.target.value)}
       className={`${style}`} />

@@ -44,7 +44,6 @@ export default function Produtos() {
         : <>
           <section className="flex flex-col w-full bg-third-neutral">
             <h2 className="text-[44px] font-semibold text-center pt-[120px]">CONHEÇA NOSSOS PRODUTOS!</h2>
-
             <div className="flex flex-col items-center gap-10 lgUltra:gap-1 lgUltra:flex-row lg:justify-evenly py-[120px]">
               <ApresentacaoPedra nome="Mármores" texto="O mármore, sinônimo de requinte, é ideal para criar ambientes sofisticados. Com sua elegância atemporal, é perfeito para bancadas de cozinha, revestimentos de banheiro e pisos luxuosos." onClick={() => marmoreRef.current && marmoreRef.current.scrollIntoView({ behavior: "smooth" })} />
               <ApresentacaoPedra nome="Granitos" texto="Robusto e versátil, o granito é a escolha ideal para ambientes que exigem durabilidade e beleza. Perfeito para bancadas de cozinha, pisos de alta circulação e revestimentos externos, proporcionando um toque de elegância e resistência." onClick={() => granitoRef.current && granitoRef.current.scrollIntoView({ behavior: "smooth" })}/>

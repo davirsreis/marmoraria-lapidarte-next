@@ -8,7 +8,7 @@ export function SectionContato() {
       <div className="flex flex-col lgPlus:flex-row justify-evenly gap-20">
         <div className="w-[564px] h-[300px]">
           <h1 className="text-[38px] text-primary-blue font-semibold mb-4 text-center bg-opacity-60-neutral rounded-[10px]">Fale com nossos consultores</h1>
-          <p className="text-[20px] text-white leading-relaxed font-bold text-justify">Nossa equipe está pronta para te atender. Fale conosco utilizando um dos contatos abaixo ou utilize nosso formulário para enviar os detalhes do seu projeto e receber seu orçamento.</p>
+          <p className="text-[20px] text-white leading-relaxed font-bold text-justify">Estamos à disposição para ajudar. Entre em contato conosco através do número/e-mail ou preencha nosso formulário para obter um orçamento personalizado para o seu projeto.</p>
           <div className="flex justify-center items-center pt-[70px]">
             <Link href={"solicitar-orcamento"} passHref>
               <Botao
