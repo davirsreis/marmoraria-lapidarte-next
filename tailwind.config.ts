@@ -8,8 +8,12 @@ const config: Config = {
   ],
   theme: {
     backgroundImage: {
-      'img_bg_slogan': "url('../assets/slogan-fundo.jpg')",
-      'img_bg_fundo_contato': "url('../assets/fundo-contato.png')"
+      // 'img_bg_slogan': "url('../assets/slogan-fundo.jpg')",
+      // 'img_bg_fundo_contato': "url('../assets/fundo-contato.png')"
+      'img_bg_slogan': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FbancadaCozinha.jpg?alt=media&token=03047300-01b6-468f-85aa-fa034da8f793')",
+      'img_bg_fundo_contato': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FBancadaCozinhaEscura2.png?alt=media&token=8bcd4d92-f4db-472f-922c-513ba32f49c8')"
+      // 'img_bg_fundo_contato': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FBancadaCozinhaClara.jpg?alt=media&token=40c76fc3-9e8f-4fa7-96c1-1169f3e7e1dd')"
+      // 'img_bg_fundo_contato': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2Fsink.jpg?alt=media&token=982dfdb5-58ca-4255-97c6-8112de7d579c')"
     },
     extend: {
       colors: {

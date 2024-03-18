@@ -32,7 +32,7 @@ export default function Tabela(props: TabelaProps) {
         <tr key={produto.id} className={`${i % 2 === 0 ? 'bg-fifth-neutral' : 'bg-primary-neutral'}`}>
           <td className={`${tdClass} text-left p-4`}>{produto.nome}</td>
           <td className={`${tdClass} text-left p-4`}>{produto.pedra}</td>
-          <td className={`${tdClass} flex justify-center items-center`}><Image src={produto.linkImg} className="h-[52px] w-[52px]" alt="" /></td>
+          <td className={`${tdClass} flex justify-center items-center`}><div className="h-[52px] w-[52px]"><Image src={produto.linkImg} alt="" width={52} height={52} /></div></td>
           {exibirAcoes && <td>{renderizarAcoes(produto)}</td>}
         </tr>
       );

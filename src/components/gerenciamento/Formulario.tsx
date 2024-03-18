@@ -86,7 +86,7 @@ export default function Formulario(props: FormularioProps) {
             ? <div className="flex flex-col justify-center items-center">
               <span className="font-bold py-2">Imagem</span>
               <div className="h-[200px] w-[200px]">
-                <Image src={imgURL} alt="Imagem" />
+                <Image src={imgURL} alt="Imagem" width={200} height={200} />
               </div>
               <button className="p-2 underline" onClick={handleAlterandoImagem}>Dejesa alterar a imagem?</button>
               {alterandoImagem
