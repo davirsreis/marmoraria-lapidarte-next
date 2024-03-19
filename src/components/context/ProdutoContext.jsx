@@ -1,4 +1,4 @@
-import { consultarArquivoJSON } from "@/functions/Auxiliares";
+import { consultarArquivoJSON } from "@/Auxiliares/functions";
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 

@@ -1,4 +1,4 @@
-import { whatsAppSubmit } from "@/functions/Auxiliares";
+import { whatsAppSubmit } from "@/Auxiliares/functions";
 
 export function FooterButton() {
 

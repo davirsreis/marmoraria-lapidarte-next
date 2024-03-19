@@ -1,7 +1,8 @@
 import { Botao } from "@/components/Botao";
 import { EntradaForm } from "@/components/EntradaForm";
-import { formatarTelefone, whatsAppSubmitForm } from "@/functions/Auxiliares";
+import { formatarTelefone, whatsAppSubmitForm } from "@/Auxiliares/functions";
 import { useState } from "react";
+import { fontePrincipal } from "@/Auxiliares/fontes";
 
 export default function Orcamento() {
   const [numeroTelefone, setNumeroTelefone] = useState('');
@@ -22,7 +23,7 @@ export default function Orcamento() {
 
   return (
     <section className=" pt-[100px] smless:pt-[110px] sm:pt-[120px] pb-[40px] smless:pb-[50px] sm:pb-[60px]" style={{ minHeight: 'calc(100vh - 0px - 60px)' }}>
-      <h2 className="text-[28px] smLess:text-[32px] sm:text-[44px] font-semibold text-center pb-[40px] smLess:pb-[60px] sm:pb-[80px]">Solicite já o seu orçamento</h2>
+      <h2 className={`text-[28px] smLess:text-[32px] sm:text-[44px] font-semibold text-center pb-[40px] smLess:pb-[60px] sm:pb-[80px] ${fontePrincipal}`}>Solicite já o seu orçamento</h2>
       <form className="flex flex-col justify-center items-center gap-4 pb-8" onSubmit={(e) => e.preventDefault()}>
         <EntradaForm valor={nome} valorMudou={setNome} tipo="text" placeholder="Seu nome" />
         <EntradaForm valor={numeroTelefone} valorMudou={setNumeroTelefone} tipo="tel" placeholder="Seu número" onChange={handleChangeTelefone} />
@@ -31,7 +32,7 @@ export default function Orcamento() {
         <div className="flex flex-col justify-center items-center text-justify">
           <div className="w-[350px] smLess:w-[400px] sm:w-[600px]">
             <p className="text-[16px] pb-4">Ao enviar o formulário, você será redirecionado para o whatsapp para iniciar a conversa com um de nossos consultores.</p>
-            <span className="text-[20px] text-center font-semibold">Envio de arquivos do projeto</span>
+            <span className={`text-[20px] text-center font-semibold`}>Envio de arquivos do projeto</span>
             <p className="text-[16px]">Caso tenha arquivos de projeto, faça o envio ao início da conversa.</p>
           </div>
         </div>
@@ -46,7 +47,7 @@ export default function Orcamento() {
         <p>Tipos de arquivo aceitos: jpg, png, pdf, zip, rar, Máx. tamanho do arquivo: 20 MB.</p> */}
       </form>
       <div className="flex flex-col justify-center items-center">
-        <Botao customClass="w-[350px] smLess:w-[400px] sm:w-[600px] font-semibold my-4" onClick={() => enviarMensagem()} cor="azul">Solicitar orçamento</Botao>
+        <Botao customClass="w-[350px] smLess:w-[400px] sm:w-[600px] font-semibold my-4 p-2 sm:p-4" onClick={() => enviarMensagem()} cor="azul">Solicitar orçamento</Botao>
       </div>
     </section>
   );

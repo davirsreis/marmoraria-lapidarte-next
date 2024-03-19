@@ -4,7 +4,7 @@ import { ItemHeader } from "./ItemHeader";
 import LogoLapidarte from '@/assets/logoLapidarte.png'
 import LogoLapidarte2 from '@/assets/logoLapidarte2.png'
 import Link from "next/link";
-import { whatsAppSubmit } from "@/functions/Auxiliares";
+import { whatsAppSubmit } from "@/Auxiliares/functions";
 import { logout } from "@/firebase/autentication";
 
 interface HeaderProps {
@@ -19,9 +19,25 @@ export function Header(props: HeaderProps) {
 
   const styleIcon = 'h-5 w-5 sm:h-7 sm:w-7'
 
+  const isBrowser = typeof window !== 'undefined';
+
+  function suportaBackdropFilter() {
+    if (!isBrowser) return false;
+
+    const el = document.createElement("div");
+    el.style.backdropFilter = "blur(10px)";
+    return !!el.style.backdropFilter;
+  }
+
+  const suportaBackdrop = suportaBackdropFilter();
+
+  const estilo = suportaBackdrop
+    ? { backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)' }
+    : { backgroundColor: 'rgba(255, 236, 209, 1)' };
+
   return (
-    <header className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50">
-      <div className="min-w-[36px] min-h-[36px] w-[36px] h-[36px] sm:min-w-[54px] sm:min-h-[54px] sm:w-[54px] sm:h-[54px]">
+    <header style={estilo} className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50">
+      <div className="min-w-[28px] min-h-[28px] w-[28px] h-[28px] smLess:min-w-[40px] smLess:min-h-[40px] smLess:w-[40px] smLess:h-[40px]  sm:min-w-[54px] sm:min-h-[54px] sm:w-[54px] sm:h-[54px]">
         <Link href="/" passHref>
           <Image
             src={LogoLapidarte2}

@@ -6,6 +6,7 @@ import AuthInput from "@/components/auth/AuthInput";
 import LogoLapidarte from '@/assets/logoLapidarte2.png'
 import Image from "next/image";
 import { Botao } from "@/components/Botao";
+import { fontePrincipal } from "@/Auxiliares/fontes";
 
 export default function Login() {
 
@@ -24,7 +25,7 @@ export default function Login() {
     try {
       await loginComEmailESenha(email, senha);
     } catch (e) {
-      exibirErro(e instanceof Error ? e.message : 'Ocorreu um erro inesperado');
+      exibirErro('Ocorreu um erro de autenticação');
     }
   }
 
@@ -49,20 +50,9 @@ export default function Login() {
         />
       </div>
       <div className={`m-10 w-[350px]`}>
-        <h1 className={`text-3xl font-bold mb-5`}>
+        <h1 className={`text-3xl font-bold mb-5 ${fontePrincipal}`}>
           Entre com a sua conta
         </h1>
-
-        {erro && (
-          <div className={`
-            flex items-center
-            bg-red-400 text-white py-3 px-5 my-2
-            border border-red-700 rounded-lg
-          `}>
-            {IconeAtencao()}
-            <span className={`ml-3`}>{erro}</span>
-          </div>
-        )}
 
         <AuthInput
           label="Email"
@@ -78,7 +68,21 @@ export default function Login() {
           valorMudou={setSenha}
           obrigatorio
         />
-        <Botao cor="azul" onClick={submeter} customClass="w-full mt-6">
+
+        <div className={`${!erro ? 'min-h-[50px] my-2' : ''}`}>
+          {erro && (
+            <div className={`
+              flex items-center
+              bg-red-400 text-white py-3 px-5 my-2
+              border border-red-700 rounded-lg
+            `}>
+              {IconeAtencao()}
+              <span className={`ml-3`}>{erro}</span>
+            </div>
+          )}
+        </div>
+
+        <Botao cor="azul" onClick={submeter} customClass="w-full my-2 p-2">
           Entrar
         </Botao>
       </div>

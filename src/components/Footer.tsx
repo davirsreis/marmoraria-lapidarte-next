@@ -1,4 +1,4 @@
-import { whatsAppSubmit } from "@/functions/Auxiliares";
+import { whatsAppSubmit } from "@/Auxiliares/functions";
 import Image from "next/image";
 import React from "react";
 

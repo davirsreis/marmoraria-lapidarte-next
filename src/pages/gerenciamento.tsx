@@ -3,10 +3,11 @@ import Formulario from "@/components/gerenciamento/Formulario"
 import Layout from "@/components/gerenciamento/Layout"
 import Tabela from "@/components/gerenciamento/Tabela"
 import useProdutos from "@/hooks/useProdutos"
-import { ordenarProdutos } from "@/functions/Auxiliares"
+import { ordenarProdutos } from "@/Auxiliares/functions"
 import ColecaoProduto from "@/firebase/db/ColecaoProduto"
 import { Header } from "@/components/Header"
 import { useState } from "react"
+import { fontePrincipal } from "@/Auxiliares/fontes"
 
 export default function Gerenciamento() {
   const { produto, produtos, selecionarProduto, excluirProduto, novoProduto, salvarProduto, tabelaVisivel, exibirTabela } = useProdutos()
@@ -32,19 +33,19 @@ export default function Gerenciamento() {
       <section className="w-full flex flex-col items-center pb-[30px] pt-[100px]">
         {tabelaVisivel ? (
           <>
-            <span className="text-[28px] sm:text-[32px] font-semibold mb-[30px]">Produtos registrados</span>
+            <span className={`text-[28px] sm:text-[32px] font-semibold mb-[30px] ${fontePrincipal}`}>Produtos registrados</span>
             <div className="flex gap-4">
               <Botao
                 cor="custom"
                 onClick={enviarArquivoJSON}
-                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold"
+                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold p-2 sm:p-4"
               >
                 Atualizar dados
               </Botao>
               <Botao
                 cor="custom"
                 onClick={novoProduto}
-                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold"
+                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold p-2 sm:p-4"
               >
                 Registrar item
               </Botao>

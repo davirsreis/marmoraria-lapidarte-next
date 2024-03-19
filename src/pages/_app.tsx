@@ -27,9 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   if (router.pathname === '/login') {
-
     return <Login {...pageProps} />
-
   }
 
   return (

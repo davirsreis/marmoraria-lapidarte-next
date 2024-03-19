@@ -98,10 +98,10 @@ export default function Formulario(props: FormularioProps) {
             : <Entrada tipo="file" />}
           {!imgURL && <p>{progressPorcent}%</p>}
           <div className=" flex justify-end mt-5 gap-2">
-            <Botao cor="verde" customClass="w-[100px]">
+            <Botao cor="verde" customClass="w-[100px] p-2 sm:p-4">
               {id ? 'Alterar' : 'Salvar'}
             </Botao>
-            <Botao cor="vermelho" onClick={props.cancelado} customClass="w-[100px]">
+            <Botao cor="vermelho" onClick={props.cancelado} customClass="w-[100px] p-2 sm:p-4">
               Cancelar
             </Botao>
           </div>
