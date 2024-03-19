@@ -11,7 +11,7 @@ export function ItemHeader(props: ItemHeaderProps) {
   const isActive = router.pathname === props.url;
   return (
     <Link href={props.url} passHref>
-      <span className={`text-primary-blue text-xl hover:text-second-blue relative inline-block ${isActive ? "border-b-2 border-primary-blue hover:border-second-blue" : ""} ${isActive ? "pb-1" : ""}`}>{props.name}</span>
+      <span className={`text-primary-blue text-sm smLess:text-lg  sm:text-xl hover:text-second-blue relative inline-block ${isActive ? "border-b-2 border-primary-blue hover:border-second-blue" : ""}`}>{props.name}</span>
     </Link>
   )
 }

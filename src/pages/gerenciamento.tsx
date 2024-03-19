@@ -6,7 +6,6 @@ import useProdutos from "@/hooks/useProdutos"
 import { ordenarProdutos } from "@/functions/Auxiliares"
 import ColecaoProduto from "@/firebase/db/ColecaoProduto"
 import { Header } from "@/components/Header"
-import { logout } from "@/firebase/autentication"
 import { useState } from "react"
 
 export default function Gerenciamento() {
@@ -29,34 +28,28 @@ export default function Gerenciamento() {
 
   return (
     <>
-      <Header />
-      <div className="w-full text-right p-4 pt-[100px]">
-        <button className="" onClick={logout}>
-          Desconectar
-        </button>
-      </div>
-
-      <section className="w-full flex flex-col items-center py-[30px]">
+      <Header logado />
+      <section className="w-full flex flex-col items-center pb-[30px] pt-[100px]">
         {tabelaVisivel ? (
           <>
-            <span className="text-[32px] font-semibold mb-[30px]">Produtos registrados</span>
+            <span className="text-[28px] sm:text-[32px] font-semibold mb-[30px]">Produtos registrados</span>
             <div className="flex gap-4">
               <Botao
                 cor="custom"
                 onClick={enviarArquivoJSON}
-                customClass="w-[150px] bg-fifth-neutral hover:border-white p-2 border border-opacity-gray text-black font-bold"
+                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold"
               >
                 Atualizar dados
               </Botao>
               <Botao
                 cor="custom"
                 onClick={novoProduto}
-                customClass="w-[150px] bg-fifth-neutral hover:border-white p-2 border border-opacity-gray text-black font-bold"
+                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold"
               >
                 Registrar item
               </Botao>
             </div>
-            <Layout className="mt-4 min-w-[500px]">
+            <Layout className="mt-8 w-full sm:min-w-[500px] sm:w-[500px] md:w-[600px] lg:w-[700px]">
               <Tabela produtos={ordenarProdutos(produtos)} produtoSelecionado={selecionarProduto} produtoExcluido={excluirProduto} />
             </Layout>
           </>
@@ -72,7 +65,7 @@ export default function Gerenciamento() {
       </section>
       {exibindoPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="w-[400px] h-[150px] bg-white p-4 rounded-md flex justify-center items-center">
+          <div className="w-[350px] h-[125px] sm:w-[400px] sm:h-[150px] bg-white p-4 rounded-md flex justify-center items-center">
             {atualizacao
               ? <div className="flex flex-col justify-center items-center gap-2">
                 <p className="text-[20px] animate-pulse font-semibold">Atualizando Dados...</p>

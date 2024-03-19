@@ -8,8 +8,14 @@ import ProtectedRouteGuard from "@/components/ProtectedRouteGuard";
 
 import { ProdutoProvider } from "../components/context/ProdutoContext";
 import Login from "./login";
+
+import { Kameron } from "next/font/google";
 import { FooterButton } from "@/components/FooterButton";
 
+const kameron = Kameron({
+  subsets: ["latin"],
+  weight: ['400']
+});
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
@@ -23,15 +29,17 @@ export default function App({ Component, pageProps }: AppProps) {
   if (router.pathname === '/login') {
 
     return <Login {...pageProps} />
-    
+
   }
 
   return (
-    <ProdutoProvider>
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
-      <FooterButton />
-    </ProdutoProvider>
+    <div >
+      <ProdutoProvider>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+        <FooterButton />
+      </ProdutoProvider>
+    </div>
   );
 }

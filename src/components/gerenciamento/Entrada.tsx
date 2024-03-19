@@ -16,7 +16,7 @@ export default function Entrada(props: EntradaProps) {
 
   const style = `
   border border-opacity-gray rounded-lg
-  focus:outline-none bg-fourth-neutral px-4 py-2
+  focus:outline-none bg-fourth-neutral px-2 sm:px-4 py-2
   ${props.somenteLeitura ? '' : 'focus:bg-white'}`
 
   return (

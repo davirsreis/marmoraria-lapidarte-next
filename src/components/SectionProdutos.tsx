@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export function SectionProdutos() {
   return (
-    <section className="w-full flex flex-col items-center bg-fourth-neutral py-[120px]">
-      <h1 className="text-[44px] font-semibold pb-[80px] text-center">CONHEÇA NOSSOS PRODUTOS!</h1>
-      <div className="grid grid-cols-2 lgPlus:grid-cols-3 grid-flow-row gap-x-[20px] sm:gap-x-[100px] lg:gap-x-[175px] gap-y-20">
+    <section className="w-full flex flex-col items-center bg-fourth-neutral py-[60px] sm:py-[120px]">
+      <h1 className="text-2xl smLess:text-3xl sm:text-[44px] font-semibold pb-[80px] text-center">CONHEÇA NOSSOS PRODUTOS!</h1>
+      <div className="grid grid-cols-2 lgPlus:grid-cols-3 grid-flow-row gap-x-[16px] smLess:gap-x-[40px] sm:gap-x-[100px] lg:gap-x-[175px] gap-y-4 smLess:gap-y-10 sm:gap-y-20 ">
         <CardProduto
           nome="Mármore Crema Marfil"
           path="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarte-a5e50.appspot.com/o/images%2FcremaMarfil.jpg?alt=media&token=f62c2c7b-fe9f-4e09-872f-46da721c3f81" />

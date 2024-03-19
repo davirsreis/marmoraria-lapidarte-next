@@ -75,11 +75,11 @@ export default function Formulario(props: FormularioProps) {
 
   return (
     <>
-      <div className="w-[500px] bg-primary-blue mt-[52px] flex justify-center items-center rounded-t-lg">
+      <div className="w-full sm:min-w-[500px] sm:w-[500px] bg-primary-blue flex justify-center items-center sm:rounded-t-lg">
         <span className="p-4 text-white font-bold">Registrando ou editando um produto</span>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col w-[500px] bg-primary-neutral p-10 rounded-b-lg border border-opacity-gray">
+      <form onSubmit={handleSubmit} className=" w-full sm:min-w-[500px] sm:w-[500px]">
+        <div className="flex flex-col bg-primary-neutral p-10 rounded-b-lg border border-opacity-gray">
           <Entrada texto="Nome" placeHolder="Digite o nome" valor={nome} valorMudou={setNome} className="mb-5" />
           <Entrada texto="Pedra" isSelection selections={pedras} placeHolder="Digite o tipo de pedra" valor={pedra} valorMudou={setPedra} className="mb-5" />
           {id

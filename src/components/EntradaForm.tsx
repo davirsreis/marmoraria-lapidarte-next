@@ -12,7 +12,7 @@ interface EntradaFormProps {
 }
 
 export function EntradaForm(props: EntradaFormProps) {
-  const style = `w-[600px] h-[60px] border border-opacity-gray rounded-lg focus:outline-none px-4 py-2 ${props.customClass}`
+  const style = `w-[350px] smLess:w-[400px] sm:w-[600px] h-[60px] border border-opacity-gray rounded-lg focus:outline-none px-4 py-2 ${props.customClass}`
   const conteudo = props.textarea
     ? <textarea
       value={props.valor}

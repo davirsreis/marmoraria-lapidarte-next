@@ -42,7 +42,7 @@ export default function Login() {
 
   return (
     <div className={`flex flex-col h-screen items-center justify-center`}>
-      <div className="h-[120px] w-[120px]">
+      <div className="h-[100px] w-[100px]  sm:h-[120px] sm:w-[120px]">
         <Image
           src={LogoLapidarte}
           alt="Logo Lapidarte"
