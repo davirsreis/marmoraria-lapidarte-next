@@ -2,7 +2,7 @@ import { ItemSobre } from "./ItemSobre";
 import LogoLapidarte from '@/assets/logoLapidarte.png'
 import IconCozinha from '@/assets/iconCozinha.png'
 import IconBanheiro from '@/assets/iconBanheiro.png'
-import IconMesa from '@/assets/IconMesa.png'
+import IconMesa from '@/assets/iconMesa.png'
 import IconPiso from '@/assets/iconPiso.png'
 import Image from "next/image";
 import { useWindowSize } from "@/hooks/useWindowSize";
