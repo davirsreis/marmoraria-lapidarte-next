@@ -8,29 +8,47 @@ import { Header } from "@/components/Header";
 import Gerenciamento from "./gerenciamento";
 import { useRouter } from "next/router";
 import Login from "./login";
+import Head from "next/head";
+import { linkLogo } from "@/Auxiliares/Valores";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const nomePagina = "Marmoraria Lapidarte";
 
+  let title = nomePagina;
   if (router.pathname === '/gerenciamento') {
-
-    return <ProtectedRouteGuard>
-      <Gerenciamento {...pageProps} />
-    </ProtectedRouteGuard>;
+    title = "Gerenciamento - " + nomePagina;
+  } else if (router.pathname === '/login') {
+    title = "Login - " + nomePagina;
+  } else if (router.pathname === '/produtos') {
+    title = "Produtos - " + nomePagina;
   }
-
-  if (router.pathname === '/login') {
-    return <Login {...pageProps} />
+  else if (router.pathname === '/solicitar-orcamento') {
+    title = "Orçamento - " + nomePagina;
   }
 
   return (
-    <div >
-      <ProdutoProvider>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
-        <FooterButton />
-      </ProdutoProvider>
+    <div>
+      <Head>
+        <title>{title}</title>
+        <link rel="icon" type="image/png" href={linkLogo} />
+      </Head>
+      {router.pathname === '/gerenciamento' && (
+        <ProtectedRouteGuard>
+          <Gerenciamento {...pageProps} />
+        </ProtectedRouteGuard>
+      )}
+      {router.pathname === '/login' && (
+        <Login {...pageProps} />
+      )}
+      {(router.pathname !== '/gerenciamento' && router.pathname !== '/login') && (
+        <ProdutoProvider>
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+          <FooterButton />
+        </ProdutoProvider>
+      )}
     </div>
   );
 }

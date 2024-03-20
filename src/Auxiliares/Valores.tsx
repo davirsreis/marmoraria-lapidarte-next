@@ -10,3 +10,5 @@ export const produtos = [
   { ocultar: false, nome: 'Quartzo Dekton Aura', path: 'https://firebasestorage.googleapis.com/v0/b/marmorarialapidarte-a5e50.appspot.com/o/images%2FquartzoDektonAura.jpg?alt=media&token=97470260-9634-407b-b97a-dcddf7adfc81' },
   { ocultar: true, nome: 'Quartzo Pental Misterio', path: 'https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/images%2FQuartzoPentalMisterio.jpg?alt=media&token=85538a71-51ee-4ecb-b73a-6d64eb0aeb0a' },
 ];
+
+export const linkLogo = 'https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FlogoLapidarte2.png?alt=media&token=8749bcef-bc07-4ef7-91bd-b990ec8b216d'
