@@ -8,18 +8,14 @@ export default function useProdutos() {
   const repo: ProdutoRepositorio = new ColecaoProduto()
 
   const { tabelaVisivel, exibirTabela, exibirFormulario } = useTabelaOuForm()
-
   const [produto, setProduto] = useState<Produto>(Produto.vazio())
   const [produtos, setProdutos] = useState<Produto[]>([])
-
 
   useEffect(() => {
     if (tabelaVisivel) {
       obterTodos();
     }
-  }, [tabelaVisivel]); // Ainda testando
-  
-  //useEffect(obterTodos, []) //Assim fica sem loop
+  }, [tabelaVisivel]);
 
   function obterTodos() {
     repo.obterTodos().then(produtos => {

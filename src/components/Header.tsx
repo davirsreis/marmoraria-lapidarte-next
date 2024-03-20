@@ -18,25 +18,22 @@ export function Header(props: HeaderProps) {
   }
 
   const styleIcon = 'h-5 w-5 sm:h-7 sm:w-7'
-
   const isBrowser = typeof window !== 'undefined';
 
   function suportaBackdropFilter() {
     if (!isBrowser) return false;
-
     const el = document.createElement("div");
     el.style.backdropFilter = "blur(10px)";
     return !!el.style.backdropFilter;
   }
 
   const suportaBackdrop = suportaBackdropFilter();
-
   const estilo = suportaBackdrop
     ? { backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)' }
     : { backgroundColor: 'rgba(255, 236, 209, 1)' };
 
   return (
-    <header style={estilo} className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50">
+    <header className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50" style={{backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)'}}>
       <div className="min-w-[28px] min-h-[28px] w-[28px] h-[28px] smLess:min-w-[40px] smLess:min-h-[40px] smLess:w-[40px] smLess:h-[40px]  sm:min-w-[54px] sm:min-h-[54px] sm:w-[54px] sm:h-[54px]">
         <Link href="/" passHref>
           <Image
