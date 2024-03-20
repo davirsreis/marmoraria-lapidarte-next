@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import Entrada from "./Entrada";
-import Produto from "../../core/Produto";
-import { Botao } from "../Botao";
-import { storage } from "@/firebase/config";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { useState, useEffect } from "react";
+import { storage } from "@/firebase/config";
+import { Botao } from "../Botao";
+import Produto from "../../core/Produto";
+import Entrada from "./Entrada";
 import Image from "next/image";
 
 interface FormularioProps {
@@ -22,7 +22,6 @@ export default function Formulario(props: FormularioProps) {
 
   const pedras = ['Marmore', 'Granito', 'Quartzo']
 
-  // Definindo os valores iniciais do formulário com base nas propriedades do produto
   useEffect(() => {
     if (props.produto) {
       setNome(props.produto.nome);
@@ -72,7 +71,6 @@ export default function Formulario(props: FormularioProps) {
     }
   };
 
-
   return (
     <>
       <div className="w-full sm:min-w-[500px] sm:w-[500px] bg-primary-blue flex justify-center items-center sm:rounded-t-lg">
@@ -80,6 +78,7 @@ export default function Formulario(props: FormularioProps) {
       </div>
       <form onSubmit={handleSubmit} className=" w-full sm:min-w-[500px] sm:w-[500px]">
         <div className="flex flex-col bg-primary-neutral p-10 rounded-b-lg border border-opacity-gray">
+          <span className="flex justify-center items-center text-sm">Todos os elementos são obrigatórios</span>
           <Entrada texto="Nome" placeHolder="Digite o nome" valor={nome} valorMudou={setNome} className="mb-5" />
           <Entrada texto="Pedra" isSelection selections={pedras} placeHolder="Digite o tipo de pedra" valor={pedra} valorMudou={setPedra} className="mb-5" />
           {id

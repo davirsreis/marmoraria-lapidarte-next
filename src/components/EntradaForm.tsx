@@ -1,6 +1,7 @@
 interface EntradaFormProps {
   id?: string
   tipo?: 'text' | 'email' | 'textarea' | 'file' | 'tel'
+  texto?: string
   valor?: any
   placeholder?: string
   customClass?: string
@@ -8,6 +9,7 @@ interface EntradaFormProps {
   multiple?: boolean
   onChange?: any
   accept?: string
+  required?: boolean
   valorMudou?: (valor: any) => void
 }
 
@@ -16,6 +18,7 @@ export function EntradaForm(props: EntradaFormProps) {
   const conteudo = props.textarea
     ? <textarea
       value={props.valor}
+      required={props.required}
       placeholder={props.placeholder}
       className={`${style}`}
       onChange={e => props.valorMudou?.(e.target.value)} />
@@ -23,12 +26,25 @@ export function EntradaForm(props: EntradaFormProps) {
       id={props.id}
       type={props.tipo}
       value={props.valor}
+      required={props.required}
       placeholder={props.placeholder}
       accept={props.accept}
       multiple={props.multiple}
-      onChange={e => props.valorMudou?.(e.target.value)}
-      className={`${style}`} />
+      maxLength={props.tipo == 'tel' ? 11 : undefined}
+      onChange={props.tipo == 'tel'
+        ? (e) => { const valorDigitado = e.target.value.replace(/\D/g, ''); props.valorMudou?.(valorDigitado) }
+        : e => props.valorMudou?.(e.target.value)}
+      pattern={props.tipo === 'tel' ? '[0-9]*' : props.tipo === 'email' ? '^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z|a-z]{2,7}$' : undefined}
+      className={`${style}`}
+    />
   return (
-    conteudo
+    <div>
+      <label className="flex flex-col">
+        <div className="flex">
+          {props.texto}{props.required && <span className="text-red-500">*</span>}
+        </div>
+        {conteudo}
+      </label>
+    </div>
   )
 }

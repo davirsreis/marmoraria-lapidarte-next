@@ -7,24 +7,36 @@ export const formatarTelefone = (valor: any) => {
 
 export function whatsAppSubmit(mensagem: string) {
   const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
-  var url = "https://wa.me/" + numeroLoja + "?text="
-    + mensagem
+  const tipoDeCelular = verificarTipoDispositivo();
+  if (tipoDeCelular == 'computador') {
+    mensagem = `https://web.whatsapp.com/send?phone=${numeroLoja}&text=${mensagem}`;
+  } else {
+    mensagem = `https://wa.me/${numeroLoja}?text=${mensagem}`;
+  }
 
-  window.open(url, '_blank');
+
+  window.open(mensagem, '_blank');
 }
 
 export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string) {
   const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
+  const tipoDeCelular = verificarTipoDispositivo();
+  let mensagem = `Olá! Gostaria de solicitar um orçamento para um projeto.%0a`;
+  mensagem += `*Nome:* ${nome}%0a`;
+  mensagem += `*E-mail:* ${email}%0a`;
 
-  var url = "https://wa.me/" + numeroLoja + "?text="
-    + "*Nome :* " + nome + "%0a"
-    + "*Número:* " + telefone + "%0a"
-    + "*Email :* " + email + "%0a"
-    + "*Descrição do orçamento :* " + descricao
-    + "%0a%0a"
-    + "This is an example of send HTML form data to WhatsApp";
+  if (telefone) {
+    mensagem += `*Número:* ${telefone}%0a`;
+  }
 
-  window.open(url, '_blank');
+  mensagem += `*Descrição do orçamento:* ${descricao}%0a`;
+
+  if (tipoDeCelular == 'computador') {
+    mensagem = `https://web.whatsapp.com/send?phone=${numeroLoja}&text=${mensagem}`;
+  } else {
+    mensagem = `https://wa.me/${numeroLoja}?text=${mensagem}`;
+  }
+  window.open(mensagem, '_blank');
 }
 
 export const ordenarProdutos = (produtos: any) => {
@@ -32,12 +44,10 @@ export const ordenarProdutos = (produtos: any) => {
     const pedraA = typeof a.pedra === 'string' ? a.pedra : '';
     const pedraB = typeof b.pedra === 'string' ? b.pedra : '';
 
-    // Ordenar pela pedra em ordem decrescente
     const comparacaoPedra = pedraB.localeCompare(pedraA);
     if (comparacaoPedra !== 0) {
       return comparacaoPedra;
     }
-    // Se as pedras forem iguais, ordenar pelo nome em ordem alfabética
     const nomeA = a.nome.toLowerCase();
     const nomeB = b.nome.toLowerCase();
     return nomeA.localeCompare(nomeB);
@@ -57,5 +67,16 @@ export async function consultarArquivoJSON() {
     }
   } catch (error) {
     console.error('Erro ao consultar o arquivo JSON:', error);
+  }
+}
+
+function verificarTipoDispositivo() {
+  var larguraJanela = window.innerWidth;
+  var limiteLarguraCelular = 768;
+
+  if (larguraJanela < limiteLarguraCelular) {
+    return 'celular';
+  } else {
+    return 'computador';
   }
 }

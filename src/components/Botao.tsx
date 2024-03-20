@@ -12,8 +12,8 @@ export function Botao(props: BotaoProps) {
   const colorVariants = {
     azul: ['bg-second-blue text-white hover:bg-white border border-second-blue hover:border hover:border-second-blue  hover:text-second-blue', 'text-base sm:text-[24px]'],
     azulAlternativo: ['bg-second-blue text-white hover:bg-white border border-second-blue hover:border hover:border-second-blue  hover:text-second-blue', 'text-base sm:text-[18px]'],
-    vermelho: ['bg-red-400 hover:bg-red-700 border border-opacity-gray rounded-lg', 'text-[20px] text-primary-blue'],
-    verde: ['bg-green-400 hover:bg-green-700 border border-opacity-gray rounded-lg', 'text-[20px] text-primary-blue'],
+    vermelho: ['bg-red-400 hover:bg-red-700 border border-opacity-gray rounded-lg', 'text-[20px] text-black'],
+    verde: ['bg-green-400 hover:bg-green-700 border border-opacity-gray rounded-lg', 'text-[20px] text-black'],
     custom: ''
   }
   return (

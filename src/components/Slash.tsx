@@ -1,5 +1,5 @@
-import Image from "next/image";
 import LogoLapidarte from '@/assets/logoLapidarte.png'
+import Image from "next/image";
 
 export function Slash() {
   return (

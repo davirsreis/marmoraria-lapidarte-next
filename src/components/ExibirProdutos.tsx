@@ -1,5 +1,5 @@
-import Produto from "@/core/Produto";
 import { CardProduto } from "./CardProduto";
+import Produto from "@/core/Produto";
 
 interface ExibirProdutosProps {
   tipoPedra?: string

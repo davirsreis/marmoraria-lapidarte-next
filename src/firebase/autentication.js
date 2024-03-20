@@ -7,7 +7,7 @@ const loginComEmailESenha = async (email, password) => {
   } catch (error) {
     var errorCode = error.code;
     var errorMessage = error.message;
-    console.error(`Ocorreu um erro: ${errorCode, errorMessage}`);
+    // console.error(`Ocorreu um erro: ${errorCode, errorMessage}`);
     throw error;
   }
 }
@@ -15,7 +15,7 @@ const loginComEmailESenha = async (email, password) => {
 const logout = () => {
   auth.signOut().then(() => {
   }).catch((error) => {
-    console.log(`Error: ${error}`);
+    // console.log(`Error: ${error}`);
   });
 }
 

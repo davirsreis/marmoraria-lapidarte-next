@@ -43,7 +43,6 @@ export default class ColecaoProduto implements ProdutoRepositorio {
 
   async obterTodos(): Promise<Produto[]> {
     const query = await this.colecao().get();
-    console.log(query);
     console.log('Obtendo produtos');
     return query.docs.map(doc => doc.data()) ?? [];
 }
@@ -58,7 +57,6 @@ export default class ColecaoProduto implements ProdutoRepositorio {
 
   async enviarArquivoJSON() {
     try {
-      console.log('teste enviarArquivoJSON');
       const produtos = await this.obterTodos();
       const dadosFormatados = produtos.map(produto => ({
         id: produto.id,
@@ -113,7 +111,6 @@ export default class ColecaoProduto implements ProdutoRepositorio {
         await colecao.add(url);
       }
 
-      console.log('URL salva com sucesso.');
     } catch (error) {
       console.error('Erro ao salvar a URL:', error);
       throw error;

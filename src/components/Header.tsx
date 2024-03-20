@@ -1,11 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import { ItemHeader } from "./ItemHeader";
-import LogoLapidarte from '@/assets/logoLapidarte.png'
-import LogoLapidarte2 from '@/assets/logoLapidarte2.png'
-import Link from "next/link";
 import { whatsAppSubmit } from "@/Auxiliares/functions";
 import { logout } from "@/firebase/autentication";
+import { ItemHeader } from "./ItemHeader";
+import LogoLapidarte2 from '@/assets/logoLapidarte2.png'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 interface HeaderProps {
   logado?: boolean
@@ -16,21 +15,7 @@ export function Header(props: HeaderProps) {
   function enviarMensagem() {
     whatsAppSubmit("Olá. Gostaria de saber mais sobre os produtos da Marmoraria Lapidarte!");
   }
-
-  const styleIcon = 'h-5 w-5 sm:h-7 sm:w-7'
-  const isBrowser = typeof window !== 'undefined';
-
-  function suportaBackdropFilter() {
-    if (!isBrowser) return false;
-    const el = document.createElement("div");
-    el.style.backdropFilter = "blur(10px)";
-    return !!el.style.backdropFilter;
-  }
-
-  const suportaBackdrop = suportaBackdropFilter();
-  const estilo = suportaBackdrop
-    ? { backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)' }
-    : { backgroundColor: 'rgba(255, 236, 209, 1)' };
+  const styleIcon = 'h-5 w-5 sm:h-7 sm:w-7';
 
   return (
     <header className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50" style={{backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)'}}>
@@ -39,7 +24,6 @@ export function Header(props: HeaderProps) {
           <Image
             src={LogoLapidarte2}
             alt="Logo Lapidarte"
-
           />
         </Link>
       </div>

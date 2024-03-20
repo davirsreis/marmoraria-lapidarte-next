@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react"
 import { auth, loginComEmailESenha } from '../firebase/autentication'
-import { useRouter } from "next/router";
-import { IconeAtencao } from "@/components/icons";
-import AuthInput from "@/components/auth/AuthInput";
-import LogoLapidarte from '@/assets/logoLapidarte2.png'
-import Image from "next/image";
-import { Botao } from "@/components/Botao";
 import { fontePrincipal } from "@/Auxiliares/fontes";
+import { IconeAtencao } from "@/components/icons";
+import { useEffect, useState } from "react"
+import { useRouter } from "next/router";
+import { Botao } from "@/components/Botao";
+import LogoLapidarte from '@/assets/logoLapidarte2.png'
+import AuthInput from "@/components/auth/AuthInput";
+import Image from "next/image";
+import Link from 'next/link';
 
 export default function Login() {
 
   const [erro, setErro] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+
+  const router = useRouter();
 
   function exibirErro(msg: string | null, tempo = 5) {
     setErro(msg);
@@ -23,13 +26,17 @@ export default function Login() {
 
   async function submeter() {
     try {
+      if (!email || !senha) {
+        exibirErro('Senha ou e-mail inválido.');
+        return false;
+      }
+
       await loginComEmailESenha(email, senha);
     } catch (e) {
       exibirErro('Ocorreu um erro de autenticação');
     }
   }
 
-  const router = useRouter();
 
   useEffect(() => {
     auth.onAuthStateChanged((user: any) => {
@@ -44,10 +51,12 @@ export default function Login() {
   return (
     <div className={`flex flex-col h-screen items-center justify-center`}>
       <div className="h-[100px] w-[100px]  sm:h-[120px] sm:w-[120px]">
-        <Image
-          src={LogoLapidarte}
-          alt="Logo Lapidarte"
-        />
+        <Link href={'/'} passHref>
+          <Image
+            src={LogoLapidarte}
+            alt="Logo Lapidarte"
+          />
+        </Link>
       </div>
       <div className={`m-10 w-[350px]`}>
         <h1 className={`text-3xl font-bold mb-5 ${fontePrincipal}`}>

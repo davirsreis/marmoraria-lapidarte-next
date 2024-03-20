@@ -1,10 +1,10 @@
+import { useWindowSize } from "@/hooks/useWindowSize";
+import { fontePrincipal } from "@/Auxiliares/fontes";
+import { produtos } from "@/Auxiliares/Valores";
 import { CardProduto } from "./CardProduto";
+import { useEffect, useState } from "react";
 import { Botao } from "./Botao";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useWindowSize } from "@/hooks/useWindowSize";
-import { produtos } from "@/Auxiliares/Valores";
-import { fontePrincipal } from "@/Auxiliares/fontes";
 
 export function SectionProdutos() {
   const [countCard, setCountCard] = useState(10);

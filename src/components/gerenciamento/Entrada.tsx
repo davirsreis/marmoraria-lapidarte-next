@@ -11,7 +11,6 @@ interface EntradaProps {
   valorMudou?: (valor: any) => void
 }
 
-
 export default function Entrada(props: EntradaProps) {
 
   const style = `
@@ -40,9 +39,6 @@ export default function Entrada(props: EntradaProps) {
             </option>
           ))}
         </select>
-
-
-
         :
         <input
           type={props.tipo ?? 'text'}

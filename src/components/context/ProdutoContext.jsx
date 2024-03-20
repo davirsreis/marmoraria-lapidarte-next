@@ -12,7 +12,6 @@ export const ProdutoProvider = ({ children }) => {
       try {
         const result = await consultarArquivoJSON();
         setDados(result);
-        console.log(result);
       } catch (error) {
         console.error("Erro ao consultar arquivo JSON:", error);
       }

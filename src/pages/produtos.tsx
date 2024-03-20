@@ -1,10 +1,10 @@
-import { fontePrincipal } from "@/Auxiliares/fontes";
-import { ApresentacaoPedra } from "@/components/ApresentacaoPedra";
-import { ExibirProdutos } from "@/components/ExibirProdutos";
-import { Slash } from "@/components/Slash";
 import { ProdutoContext } from "@/components/context/ProdutoContext";
-
+import { ApresentacaoPedra } from "@/components/ApresentacaoPedra";
 import { useState, useEffect, useContext, useRef } from "react";
+import { ExibirProdutos } from "@/components/ExibirProdutos";
+import { fontePrincipal } from "@/Auxiliares/fontes";
+import { Slash } from "@/components/Slash";
+
 
 export default function Produtos() {
   const [dadosProdutos, setDadosProdutos] = useState<any[]>([]);

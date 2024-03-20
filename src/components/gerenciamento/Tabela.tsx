@@ -1,6 +1,6 @@
-import Image from "next/image"
-import Produto from "../../core/Produto"
 import { IconeEdit, IconeTrash } from "./Icones"
+import Produto from "../../core/Produto"
+import Image from "next/image"
 
 interface TabelaProps {
   produtos?: Produto[]

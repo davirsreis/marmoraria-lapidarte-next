@@ -1,13 +1,13 @@
-import { Botao } from "@/components/Botao"
-import Formulario from "@/components/gerenciamento/Formulario"
-import Layout from "@/components/gerenciamento/Layout"
-import Tabela from "@/components/gerenciamento/Tabela"
-import useProdutos from "@/hooks/useProdutos"
-import { ordenarProdutos } from "@/Auxiliares/functions"
-import ColecaoProduto from "@/firebase/db/ColecaoProduto"
-import { Header } from "@/components/Header"
-import { useState } from "react"
-import { fontePrincipal } from "@/Auxiliares/fontes"
+import { ordenarProdutos } from "@/Auxiliares/functions";
+import { fontePrincipal } from "@/Auxiliares/fontes";
+import { Header } from "@/components/Header";
+import { Botao } from "@/components/Botao";
+import { useState } from "react";
+import Formulario from "@/components/gerenciamento/Formulario";
+import ColecaoProduto from "@/firebase/db/ColecaoProduto";
+import Layout from "@/components/gerenciamento/Layout";
+import Tabela from "@/components/gerenciamento/Tabela";
+import useProdutos from "@/hooks/useProdutos";
 
 export default function Gerenciamento() {
   const { produto, produtos, selecionarProduto, excluirProduto, novoProduto, salvarProduto, tabelaVisivel, exibirTabela } = useProdutos()
@@ -36,16 +36,16 @@ export default function Gerenciamento() {
             <span className={`text-[28px] sm:text-[32px] font-semibold mb-[30px] ${fontePrincipal}`}>Produtos registrados</span>
             <div className="flex gap-4">
               <Botao
-                cor="custom"
+                cor="azulAlternativo"
                 onClick={enviarArquivoJSON}
-                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold p-2 sm:p-4"
+                customClass="w-[200px] p-2 sm:p-4"
               >
                 Atualizar dados
               </Botao>
               <Botao
-                cor="custom"
+                cor="azulAlternativo"
                 onClick={novoProduto}
-                customClass="w-[150px] bg-fifth-neutral hover:border-white border border-opacity-gray text-black font-bold p-2 sm:p-4"
+                customClass="w-[200px] p-2 sm:p-4"
               >
                 Registrar item
               </Botao>

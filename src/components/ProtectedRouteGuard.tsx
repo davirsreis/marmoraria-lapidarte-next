@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { auth } from '@/firebase/config';
+import { useRouter } from 'next/router';
 import { Slash } from './Slash';
 
 interface ProtectedRouteGuardProps {
