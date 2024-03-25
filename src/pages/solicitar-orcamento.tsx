@@ -60,7 +60,7 @@ export default function Orcamento() {
 
   async function encurtarURL(urlOriginal: string) {
     const apiUrl = 'https://api.tinyurl.com/create';
-    const apiKey = process.env.NEXT_PUBLIC_TINYURL_API_KEY;
+    const apiKey = process.env.TINYURL_API_KEY;
 
     try {
       const response = await fetch(apiUrl, {
@@ -124,7 +124,7 @@ export default function Orcamento() {
   }
 
   async function enviarMensagem() {
-    if (!captchaResolved && process.env.NEXT_PUBLIC_PRODUCTION_MODE == 'production') {
+    if (!captchaResolved && process.env.PRODUCTION_MODE == 'production') {
       setMensagemSucess(['Por favor, complete o reCAPTCHA.', 'danger']);
       return;
     }
@@ -291,11 +291,11 @@ export default function Orcamento() {
           </div>
         )}
       </div>
-      {(process.env.NEXT_PUBLIC_PRODUCTION_MODE == 'production')
+      {(process.env.PRODUCTION_MODE == 'production')
         ?
         <div className="flex justify-center items-center">
           <ReCAPTCHA
-            sitekey={`${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+            sitekey={`${process.env.RECAPTCHA_SITE_KEY}`}
             onChange={handleCaptchaChange}
           />
         </div>
