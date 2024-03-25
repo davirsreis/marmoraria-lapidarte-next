@@ -2,7 +2,7 @@ import { formatarTelefone, whatsAppSubmitForm } from "@/Auxiliares/functions";
 import { EntradaForm } from "@/components/orcamento/EntradaForm";
 import { fontePrincipal } from "@/Auxiliares/fontes";
 import { Botao } from "@/components/Botao";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "@/firebase/config";
 import JSZip from 'jszip';
@@ -18,6 +18,10 @@ export default function Orcamento() {
   const [progressPorcent, setPorgessPorcent] = useState(0);
   const [captchaResolved, setCaptchaResolved] = useState(false);
   const [mensagemSucess, setMensagemSucess] = useState<string[]>(['', '']);
+
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_PRODUCTION_MODE == 'dev') { setCaptchaResolved(true) };
+  }, [])
 
   function handleCaptchaChange(value: any) {
     setCaptchaResolved(!!value);
@@ -60,7 +64,7 @@ export default function Orcamento() {
 
   async function encurtarURL(urlOriginal: string) {
     const apiUrl = 'https://api.tinyurl.com/create';
-    const apiKey = process.env.TINYURL_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_TINYURL_API_KEY;
 
     try {
       const response = await fetch(apiUrl, {
@@ -124,7 +128,7 @@ export default function Orcamento() {
   }
 
   async function enviarMensagem() {
-    if (!captchaResolved && process.env.PRODUCTION_MODE == 'production') {
+    if (!captchaResolved) {
       setMensagemSucess(['Por favor, complete o reCAPTCHA.', 'danger']);
       return;
     }
@@ -136,7 +140,8 @@ export default function Orcamento() {
         if (arquivos.length > 0) {
           if (arquivos.some(file => !['.zip', '.rar'].includes(file.name.slice(-4).toLowerCase()))) {
             const urlParaEncurtar = await enviarArquivosParaFirebase(arquivos);
-            urlArquivo = await encurtarURL(urlParaEncurtar);
+            // urlArquivo = await encurtarURL(urlParaEncurtar);
+            urlArquivo = urlParaEncurtar;
           } else {
             await Promise.all(arquivos.map(async (file) => {
               const storageRef = ref(storage, `arquivos/${nome}/${file.name}`);
@@ -291,11 +296,11 @@ export default function Orcamento() {
           </div>
         )}
       </div>
-      {(process.env.PRODUCTION_MODE == 'production')
+      {(process.env.NEXT_PUBLIC_PRODUCTION_MODE == 'production')
         ?
         <div className="flex justify-center items-center">
           <ReCAPTCHA
-            sitekey={`${process.env.RECAPTCHA_SITE_KEY}`}
+            sitekey={`${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
             onChange={handleCaptchaChange}
           />
         </div>

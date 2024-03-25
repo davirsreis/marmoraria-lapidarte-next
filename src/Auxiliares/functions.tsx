@@ -6,7 +6,7 @@ export const formatarTelefone = (valor: any) => {
 };
 
 export function whatsAppSubmit(mensagem: string) {
-  const numeroLoja = process.env.PHONE_NUMBER
+  const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
   const tipoDeCelular = verificarTipoDispositivo();
   if (tipoDeCelular == 'computador') {
     mensagem = `https://web.whatsapp.com/send?phone=${numeroLoja}&text=${mensagem}`;
@@ -19,7 +19,7 @@ export function whatsAppSubmit(mensagem: string) {
 }
 
 export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string, urlArquivo: string | undefined) {
-  const numeroLoja = process.env.PHONE_NUMBER
+  const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
   const tipoDeCelular = verificarTipoDispositivo();
   let mensagem = `Olá! Gostaria de solicitar um orçamento para um projeto.%0a`;
   mensagem += `*Nome:* ${nome}%0a`;
