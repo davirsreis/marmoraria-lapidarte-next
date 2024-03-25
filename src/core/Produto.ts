@@ -1,10 +1,10 @@
 export default class Produto {
   #id: string
   #nome: string
-  #pedra: string[]
+  #pedra: string
   #linkImg: string
 
-  constructor(nome: string, pedra: string[], linkImg: string, id: string = '') {
+  constructor(nome: string, pedra: string, linkImg: string, id: string = '') {
     this.#nome = nome
     this.#pedra = pedra
     this.#linkImg = linkImg
@@ -12,7 +12,7 @@ export default class Produto {
   }
 
   static vazio() {
-    return new Produto('', [], '')
+    return new Produto('', '', '')
   }
 
   get id() {

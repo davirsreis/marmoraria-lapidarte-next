@@ -1,9 +1,9 @@
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { fontePrincipal } from "@/Auxiliares/fontes";
 import { produtos } from "@/Auxiliares/Valores";
-import { CardProduto } from "./CardProduto";
+import { CardProduto } from "../produtos/CardProduto";
 import { useEffect, useState } from "react";
-import { Botao } from "./Botao";
+import { Botao } from "../Botao";
 import Link from "next/link";
 
 export function SectionProdutos() {

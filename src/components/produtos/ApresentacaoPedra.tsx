@@ -1,5 +1,5 @@
 import { fontePrincipal } from "@/Auxiliares/fontes";
-import { Botao } from "./Botao";
+import { Botao } from "../Botao";
 
 interface ApresentacaoPedraProps {
   nome: string

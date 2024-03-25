@@ -4,7 +4,7 @@ import { Mako } from "next/font/google";
 
 const kameron = Kameron({
   subsets: ["latin"],
-  weight: ['400']
+  weight: ['400', '600'],
 });
 
 const buda = Buda({

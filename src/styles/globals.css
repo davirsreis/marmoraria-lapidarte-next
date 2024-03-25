@@ -5,3 +5,12 @@
 body {
   background-color: #F4EEE5;
 }
+
+.chooseBrand {
+  scrollbar-color: transparent transparent;
+}
+
+.chooseBrand::-webkit-scrollbar {
+  height: 1px !important;
+  background-color: transparent !important;
+}

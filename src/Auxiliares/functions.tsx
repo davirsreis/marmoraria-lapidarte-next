@@ -18,7 +18,7 @@ export function whatsAppSubmit(mensagem: string) {
   window.open(mensagem, '_blank');
 }
 
-export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string) {
+export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string, urlArquivo: string | undefined) {
   const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
   const tipoDeCelular = verificarTipoDispositivo();
   let mensagem = `Olá! Gostaria de solicitar um orçamento para um projeto.%0a`;
@@ -30,6 +30,11 @@ export function whatsAppSubmitForm(nome: string, telefone: string, email: string
   }
 
   mensagem += `*Descrição do orçamento:* ${descricao}%0a`;
+
+  if (urlArquivo) {
+    console.log(urlArquivo);
+    mensagem += `*Link para download de arquivos:* ${urlArquivo}%0a`;
+  }
 
   if (tipoDeCelular == 'computador') {
     mensagem = `https://web.whatsapp.com/send?phone=${numeroLoja}&text=${mensagem}`;

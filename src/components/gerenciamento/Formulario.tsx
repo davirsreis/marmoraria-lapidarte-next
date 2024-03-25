@@ -15,7 +15,7 @@ interface FormularioProps {
 export default function Formulario(props: FormularioProps) {
   const id = props.produto?.id ?? null
   const [nome, setNome] = useState('')
-  const [pedra, setPedra] = useState<string[]>([])
+  const [pedra, setPedra] = useState<string>('')
   const [imgURL, setImgURL] = useState('');
   const [progressPorcent, setPorgessPorcent] = useState(0);
   const [alterandoImagem, setAlterandoImagem] = useState(true);

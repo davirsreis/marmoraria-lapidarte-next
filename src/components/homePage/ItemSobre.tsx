@@ -12,7 +12,7 @@ export function ItemSobre(props: ItemSobreProps) {
       <div className="w-8 h-8 flex items-center justify-center">
         <Image
           src={props.img}
-          alt="Icon phone"
+          alt={`Ícone ${props.text}`}
         />
       </div>
       <p className="w-[220px] smLess:w-[280px] sm:w-[400px] text-black pr-2">{props.text}</p>
