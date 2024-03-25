@@ -20,7 +20,7 @@ export default function Orcamento() {
   const [mensagemSucess, setMensagemSucess] = useState<string[]>(['', '']);
 
   const production_mode = process.env.NEXT_PUBLIC_PRODUCTION_MODE;
-  const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+  const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   useEffect(() => {
     if (production_mode == 'dev') { setCaptchaResolved(true) };
@@ -303,7 +303,7 @@ export default function Orcamento() {
         ?
         <div className="flex justify-center items-center">
           <ReCAPTCHA
-            sitekey={`${recaptcha_key}`}
+            sitekey={recaptcha_key ?? ''}
             onChange={handleCaptchaChange}
           />
         </div>
