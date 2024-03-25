@@ -19,8 +19,10 @@ export default function Orcamento() {
   const [captchaResolved, setCaptchaResolved] = useState(false);
   const [mensagemSucess, setMensagemSucess] = useState<string[]>(['', '']);
 
+  const production_mode = process.env.NEXT_PUBLIC_PRODUCTION_MODE;
+
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_PRODUCTION_MODE == 'dev') { setCaptchaResolved(true) };
+    if (production_mode == 'dev') { setCaptchaResolved(true) };
   }, [])
 
   function handleCaptchaChange(value: any) {
@@ -296,7 +298,7 @@ export default function Orcamento() {
           </div>
         )}
       </div>
-      {(process.env.NEXT_PUBLIC_PRODUCTION_MODE == 'production')
+      {(production_mode == 'production')
         ?
         <div className="flex justify-center items-center">
           <ReCAPTCHA
