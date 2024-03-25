@@ -60,28 +60,35 @@ export function ProdutoSeparado(props: ProdutoSeparadoProps) {
               <div className="w-full h-full flex flex-col justify-center items-center bg-opacity-black pt-[100px]">
                 <h1 className={`text-white text-[24px] smLess:text-[36px] sm:text-[44px] ${fontePrincipal}`}>{props.nome}</h1>
                 <p className={`w-[350px] sm:w-[500px] md:w-[500px] lg:w-[450px] lgPlus:w-[580px] lgUltra:w-[650px] py-[16px] smLess:py-[24px] sm:py-[48px] text-white text-base smLess:text-[20px] sm:text-[26px] md:text-[28px] text-justify ${fontePrincipal}`}>{props.texto}</p>
-                <button onClick={() => referencia.current && referencia.current.scrollIntoView({ behavior: "smooth" })}>
-                  <div className="h-8 w-8 smLess:h-12 smLess:w-12 sm:h-16 sm:w-16 animate-bounce">
-                    {iconArrowDown}
-                  </div>
-                </button>
+                {dadosFiltrados.length == 0
+                  ? null
+                  : <button onClick={() => referencia.current && referencia.current.scrollIntoView({ behavior: "smooth" })}>
+                    <div className="h-8 w-8 smLess:h-12 smLess:w-12 sm:h-16 sm:w-16 animate-bounce">
+                      {iconArrowDown}
+                    </div>
+                  </button>
+                }
+
               </div>
             </div>
           </section>
           <section className="flex flex-col justify-center items-center py-12 smLess:py-16 sm:py-20">
-            <p className={`text-[22px] smLess:text-[28px] sm:text-[32px] ${fontePrincipal}`}>Os <span className="lowercase">Mármores</span> são <span className="text-second-blue">ideais</span> para:</p>
+            <p className={`text-[22px] smLess:text-[28px] sm:text-[32px] ${fontePrincipal}`}>Os <span className="lowercase">{props.nome}</span> são <span className="text-second-blue">ideais</span> para:</p>
             <div className="w-[300px] sm:w-[700px] flex flex-col sm:flex-row gap-4 smLess:gap-8 sm:gap-12 justify-center items-center pt-10">
               <Card textoCard={props.card1} path={props.path1} />
               <Card textoCard={props.card2} path={props.path2} />
               <Card textoCard={props.card3} path={props.path3} />
             </div>
           </section>
-          <section className="py-12 smLess:py-16 sm:py-20 bg-third-neutral" ref={referencia}>
-            <h2 className={`text-center text-[28px] smLess:text-[32px] sm:text-[40px] uppercase font-semibold pb-[45px] smLess:pb-[75px] sm:pb-[100px] ${fontePrincipal}`}>{props.nome}</h2>
-            <div className="flex justify-center">
-              <ExibirProdutos produtos={dadosFiltrados} tipoPedra={props.tipoPedra} />
-            </div>
-          </section>
+          {dadosFiltrados.length == 0
+            ? null
+            : <section className="py-12 smLess:py-16 sm:py-20 bg-third-neutral" ref={referencia}>
+              <h2 className={`text-center text-[28px] smLess:text-[32px] sm:text-[40px] uppercase font-semibold pb-[45px] smLess:pb-[75px] sm:pb-[100px] ${fontePrincipal}`}>{props.nome}</h2>
+              <div className="flex justify-center">
+                <ExibirProdutos produtos={dadosFiltrados} tipoPedra={props.tipoPedra} />
+              </div>
+            </section>
+          }
         </section>
       )}
     </>

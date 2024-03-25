@@ -21,9 +21,11 @@ export function whatsAppSubmit(mensagem: string) {
 export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string, urlArquivo: string | undefined) {
   const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
   const tipoDeCelular = verificarTipoDispositivo();
+
   let mensagem = `Olá! Gostaria de solicitar um orçamento para um projeto.%0a`;
   mensagem += `*Nome:* ${nome}%0a`;
   mensagem += `*E-mail:* ${email}%0a`;
+
 
   if (telefone) {
     mensagem += `*Número:* ${telefone}%0a`;

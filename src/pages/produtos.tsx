@@ -10,6 +10,7 @@ export default function Produtos() {
   const [produtosFiltradosMarmore, setProdutosFiltradosMarmore] = useState<any[]>([]);
   const [produtosFiltradosGranito, setProdutosFiltradosGranito] = useState<any[]>([]);
   const [produtosFiltradosQuartzo, setProdutosFiltradosQuartzo] = useState<any[]>([]);
+  const [produtosFiltradosNobileStone, setProdutosFiltradosNobileStone] = useState<any[]>([]);
   const dados = useContext(ProdutoContext);
 
   useEffect(() => {
@@ -28,6 +29,9 @@ export default function Produtos() {
 
       const produtosFiltradosQuartzo = dadosProdutos.filter(produto => produto.pedra === 'Quartzo');
       setProdutosFiltradosQuartzo(produtosFiltradosQuartzo);
+
+      const produtosFiltradosNobileStone = dadosProdutos.filter(produto => produto.pedra === 'NobileStone');
+      setProdutosFiltradosNobileStone(produtosFiltradosNobileStone);
     }
   }, [dadosProdutos]);
 
@@ -45,11 +49,26 @@ export default function Produtos() {
               <li><nav className="hover:text-primary-blue"><Link href={'/granitos'} passHref>Granitos</Link></nav></li>
               <span>|</span>
               <li><nav className="hover:text-primary-blue"><Link href={'/quartzos'} passHref>Quartzos</Link></nav></li>
+              <span>|</span>
+              <li><nav className="hover:text-primary-blue"><Link href={'/nobilestone'} passHref>NobileStone</Link></nav></li>
             </ul>
           </section>
-          <RolagemProdutos nome="Mármores" url="/marmores" items={produtosFiltradosMarmore} customClass={'bg-fourth-neutral'} />
-          <RolagemProdutos nome="Granitos" url="/granitos" items={produtosFiltradosGranito} customClass={'bg-third-neutral'} />
-          <RolagemProdutos nome="Quartzos" url="/quartzos" items={produtosFiltradosQuartzo} customClass={'bg-fourth-neutral'} />
+          
+          {(produtosFiltradosMarmore.length == 0)
+            ? null
+            : <RolagemProdutos nome="Mármores" url="/marmores" items={produtosFiltradosMarmore} customClass={'bg-fourth-neutral'} />}
+
+          {(produtosFiltradosGranito.length == 0)
+            ? null
+            : <RolagemProdutos nome="Granitos" url="/granitos" items={produtosFiltradosGranito} customClass={'bg-fourth-neutral'} />}
+
+          {(produtosFiltradosQuartzo.length == 0)
+            ? null
+            : <RolagemProdutos nome="Quartzos" url="/quartzos" items={produtosFiltradosQuartzo} customClass={'bg-fourth-neutral'} />}
+
+          {(produtosFiltradosNobileStone.length == 0)
+            ? null
+            : <RolagemProdutos nome="NobileStone" url="/nobilestone" items={produtosFiltradosNobileStone} customClass={'bg-fourth-neutral'} />}
         </>
       )}
     </>

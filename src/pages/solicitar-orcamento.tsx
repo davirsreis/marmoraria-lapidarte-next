@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "@/firebase/config";
 import JSZip from 'jszip';
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Orcamento() {
   const [numeroTelefone, setNumeroTelefone] = useState('');
@@ -16,19 +16,19 @@ export default function Orcamento() {
   const [erroFormulario, setErroFormulario] = useState<string | null>(null);
   const [arquivos, setArquivos] = useState<File[]>([]);
   const [progressPorcent, setPorgessPorcent] = useState(0);
-  const [captchaResolved, setCaptchaResolved] = useState(false);
+  // const [captchaResolved, setCaptchaResolved] = useState(false);
   const [mensagemSucess, setMensagemSucess] = useState<string[]>(['', '']);
 
   const production_mode = process.env.NEXT_PUBLIC_PRODUCTION_MODE;
-  const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  // const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  useEffect(() => {
-    if (production_mode == 'dev') { setCaptchaResolved(true) };
-  }, [])
+  // useEffect(() => {
+  //   if (production_mode == 'dev') { setCaptchaResolved(true) };
+  // }, [])
 
-  function handleCaptchaChange(value: any) {
-    setCaptchaResolved(!!value);
-  }
+  // function handleCaptchaChange(value: any) {
+  //   setCaptchaResolved(!!value);
+  // }
 
   const handleChangeTelefone = (event: any) => {
     const valorDigitado = event.target.value;
@@ -118,7 +118,7 @@ export default function Orcamento() {
           console.log(`Arquivo compactado enviado com sucesso!`);
           getDownloadURL(uploadTask.snapshot.ref)
             .then(async (downloadURL) => {
-              console.log(`URL de download do arquivo compactado (Esta aqui):`, downloadURL);
+              // console.log(`URL de download do arquivo compactado (Esta aqui):`, downloadURL);
               resolve(downloadURL);
             })
             .catch((error) => {
@@ -131,10 +131,10 @@ export default function Orcamento() {
   }
 
   async function enviarMensagem() {
-    if (!captchaResolved) {
-      setMensagemSucess(['Por favor, complete o reCAPTCHA.', 'danger']);
-      return;
-    }
+    // if (!captchaResolved) {
+    //   setMensagemSucess(['Por favor, complete o reCAPTCHA.', 'danger']);
+    //   return;
+    // }
     if (validarFormulario()) {
       setErroFormulario('');
       let urlArquivo: string | undefined;
@@ -169,8 +169,12 @@ export default function Orcamento() {
                     console.log(`Arquivo ${file.name} enviado com sucesso!`);
                     getDownloadURL(uploadTask.snapshot.ref)
                       .then(async (downloadURL) => {
-                        console.log(`URL de download do arquivo ${file.name}:`, downloadURL);
-                        urlArquivo = await encurtarURL(downloadURL);
+                        // console.log(`URL de download do arquivo ${file.name}:`, downloadURL);
+
+                        // urlArquivo = await encurtarURL(downloadURL);
+                        console.log(storageRef.fullPath);
+
+                        urlArquivo = downloadURL;
                         resolve();
                       })
                       .catch((error) => {
@@ -183,7 +187,6 @@ export default function Orcamento() {
             }));
           }
         }
-        console.log(urlArquivo);
         whatsAppSubmitForm(nome, numeroTelefone, email, descricao, urlArquivo);
 
         setNome('');
@@ -192,7 +195,7 @@ export default function Orcamento() {
         setDescricao('');
         setArquivos([]);
         setPorgessPorcent(0);
-        setMensagemSucess(['Arquivo enviado com sucesso!', 'sucessnpm'])
+        setMensagemSucess(['Arquivo enviado com sucesso!', 'success'])
         const fileInput = document.getElementById('fileInput') as HTMLInputElement | null;
         if (fileInput) {
           fileInput.value = '';
@@ -299,7 +302,8 @@ export default function Orcamento() {
           </div>
         )}
       </div>
-      {(production_mode == 'production')
+
+      {/* {(production_mode == 'production')
         ?
         <div className="flex justify-center items-center">
           <ReCAPTCHA
@@ -308,7 +312,7 @@ export default function Orcamento() {
           />
         </div>
         : null
-      }
+      } */}
 
       {!mensagemSucess &&
         <div className="flex justify-center items-center">

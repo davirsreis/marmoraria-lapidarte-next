@@ -16,6 +16,7 @@ const config: Config = {
       'img_bg_fundo_marmores': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FBancadaBanheiro.jpg?alt=media&token=40d4a5b2-f4b5-4d94-ad5e-048c8455284f')",
       'img_bg_fundo_granitos': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FcozinhaSimples.jpg?alt=media&token=c4aa1988-8105-4670-8558-18c2ada66c1c')",
       'img_bg_fundo_quartzos': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FbancadaCozinhaPreta.jpg?alt=media&token=1e4ee5bf-c018-46da-8caf-31e3878fd67f')",
+      'img_bg_fundo_nobilestone': "url('https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FcozinhaNobileStone.jpg?alt=media&token=e1eb0d05-b52c-4ce6-b2f9-b3398b150df2')",
     },
     extend: {
       colors: {
