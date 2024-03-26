@@ -36,6 +36,7 @@ const config: Config = {
         'opacity-20-neutral': 'rgba(255, 236, 209, 0.2)',
         'opacity-60-neutral': 'rgba(255, 236, 209, 0.6)',
         'opacity-20-blue': 'rgba(0, 21, 36, 0.2)',
+        'opacity-10-blue': 'rgba(0, 21, 36, 0.1)',
         'opacity-60-blue': 'rgba(0, 21, 36, 0.6)',
         'opacity-50-second-blue': 'rgba(41, 67, 128, 0.5)',
       },

@@ -25,7 +25,7 @@ export function SectionSobre() {
       setImageWidth(550);
     }
   }, [windowSize]);
-  
+
 
   return (
     <section className="w-full flex flex-col bg-third-neutral pb-[80px] sm:pb-[100px] pt-[60px]">
@@ -45,10 +45,10 @@ export function SectionSobre() {
           <h2 className={`text-primary-gray text-[32px] sm:text-[48px] font-semibold leading-tight mb-6 ${fontePrincipal}`}>Melhores soluções para o seu projeto</h2>
           <p className={`mb-16 text-second-gray`}>Atendimento e serviço especializado, oferecendo uma grande diversidade de mármores.</p>
           <ul className="flex flex-col items-start gap-9">
-            <ItemSobre img={IconCozinha} text="Bancadas de cozinha" customClass="pb-9 border-b-[1px] border-opacity-gray" />
-            <ItemSobre img={IconBanheiro} text="Banheiros" customClass="pb-9 border-b-[1px] border-opacity-gray" />
-            <ItemSobre img={IconMesa} text="Mesas" customClass="pb-9 border-b-[1px] border-opacity-gray" />
-            <ItemSobre img={IconPiso} text="Pisos e revestimentos" />
+            <ItemSobre img={'https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FcozinhaIcon2.png?alt=media&token=cec2ba50-0f91-46a8-8453-bb418bf2c344'} text="Bancadas de cozinha" customClass="pb-9 border-b-[1px] border-opacity-gray" />
+            <ItemSobre img={'https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FbanheiroIcon2.png?alt=media&token=b6a3fc15-3b6f-408a-86ab-bccdb6d3379f'} text="Banheiros" customClass="pb-9 border-b-[1px] border-opacity-gray" />
+            <ItemSobre img={'https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FmesaIconColorido.png?alt=media&token=904a6852-2ec6-45da-b5dc-f5d4e89999a7'} text="Mesas" customClass="pb-9 border-b-[1px] border-opacity-gray" />
+            <ItemSobre img={'https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FpisoIconColorido.png?alt=media&token=a8026d2d-9b8d-49a7-a714-d575c58d3a5b'} text="Pisos e revestimentos" />
           </ul>
         </div>
         <div className="lgPlus:mt-0 sm:py-16 flex items-center justify-center">

@@ -11,9 +11,9 @@ export default function Granito() {
       card1="Bancadas de cozinha"
       card2="Pisos de Alta Circulação"
       card3="Revestimentos Externos"
-      path1="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FcozinhaIcon.png?alt=media&token=d7d45491-32ab-4c2f-ad5b-595c14bf2619"
-      path2="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FbanheiroIcon.png?alt=media&token=6015b249-3c84-4aee-a1ff-ae5853d16699"
-      path3="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FpisoIcon.png?alt=media&token=65be4e03-dd27-44fc-9b3f-c31a5fb9467f"
+      path1="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FcozinhaIcon2.png?alt=media&token=cec2ba50-0f91-46a8-8453-bb418bf2c344"
+      path2="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FpisoExternoIconColorido.png?alt=media&token=88bcdca8-53ad-4474-b441-f2f97373db7a"
+      path3="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FescadaExternaIconColorido.png?alt=media&token=cf06b005-b7bc-4f7f-ba14-52911ef1b9cf"
       tipoPedra="Granito"
     />
   )

@@ -2,6 +2,7 @@ interface EntradaFormProps {
   id?: string
   tipo?: 'text' | 'email' | 'textarea' | 'file' | 'tel'
   texto?: string
+  textoComplemento?: string
   valor?: any
   placeholder?: string
   customClass?: string
@@ -41,7 +42,7 @@ export function EntradaForm(props: EntradaFormProps) {
     <div>
       <label className="flex flex-col">
         <div className="flex">
-          {props.texto}{props.required && <span className="text-red-500">*</span>}
+          {props.texto}{props.required && <span className="text-red-500">*</span>}<span className="text-opacity-black">{props.textoComplemento}</span>
         </div>
         {conteudo}
       </label>

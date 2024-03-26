@@ -1,6 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { iconArrowLeft, iconArrowRight, iconArrowRightAndLeft } from "../icons";
 import { fontePrincipal } from "@/Auxiliares/fontes";
+import Slider from "react-slick";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 interface Item {
   id: number;
@@ -16,118 +18,101 @@ interface RolagemProdutosProps {
 }
 
 export function RolagemProdutos(props: RolagemProdutosProps) {
-  const itemsRef = useRef<HTMLDivElement>(null);
-  const [isMouseDown, setIsMouseDown] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
   const [hoveredItemId, setHoveredItemId] = useState<number | null>(null);
-  
+  const [slidesToShow, setSlidesToShow] = useState(5);
+  const [slidesToScroll, setSlidesToScroll] = useState(2.5);
+  const windowSize = useWindowSize();
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    setIsMouseDown(true);
-    setStartX(e.pageX - itemsRef.current!.getBoundingClientRect().left);
-    setScrollLeft(itemsRef.current?.scrollLeft || 0);
-  };
+  useEffect(() => {
+    if (windowSize.width < 376) {
+      setSlidesToShow(1.05);
+      setSlidesToScroll(1.5);
+    } else if (windowSize.width < 475) {
+      setSlidesToShow(1.05);
+      setSlidesToScroll(1.5);
+    } else if (windowSize.width < 540) {
+      setSlidesToShow(1.3);
+      setSlidesToScroll(1.5);
+    } else if (windowSize.width < 640) {
+      setSlidesToShow(1.5);
+      setSlidesToScroll(1.5);
+    } else if (windowSize.width < 810) {
+      setSlidesToShow(1.5);
+      setSlidesToScroll(1.5);
+    } else if (windowSize.width < 970) {
+      setSlidesToShow(2.1);
+      setSlidesToScroll(2.5);
+    } else if (windowSize.width < 1170) {
+      setSlidesToShow(2.5);
+      setSlidesToScroll(2.5);
+    } else if (windowSize.width < 1320) {
+      setSlidesToShow(3.1);
+      setSlidesToScroll(2.5);
+    } else if (windowSize.width < 1520) {
+      setSlidesToShow(3.5);
+      setSlidesToScroll(3);
+    } else if (windowSize.width < 1680) {
+      setSlidesToShow(4.1);
+      setSlidesToScroll(3);
+    } else if (windowSize.width < 1880) {
+      setSlidesToShow(4.5);
+      setSlidesToScroll(3);
+    } else {
+      setSlidesToShow(5.1);
+      setSlidesToScroll(3);
+    }
+  }, [windowSize]);
 
   const handleMouseLeave = () => {
-    setIsMouseDown(false);
     setHoveredItemId(null);
   };
-
-  const handleMouseUp = () => {
-    setIsMouseDown(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!isMouseDown || !itemsRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - itemsRef.current.getBoundingClientRect().left;
-    const walk = (x - startX) * 2;
-    itemsRef.current.scrollLeft = scrollLeft - walk;
-  };
-
   const handleItemMouseEnter = (itemId: number) => {
     setHoveredItemId(itemId);
   };
 
-  const scrollLeftHandler = () => {
-    if (itemsRef.current) {
-      itemsRef.current.scrollLeft -= 308;
-    }
-  };
-
-  const scrollRightHandler = () => {
-    if (itemsRef.current) {
-      itemsRef.current.scrollLeft += 308;
-    }
+  var settings = {
+    dots: true,
+    speed: 500,
+    slidesToShow: slidesToShow,
+    slidesToScroll: slidesToScroll,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
   };
 
   return (
-    <section className={`py-10 ${props.customClass}`}>
-      <h1 className={`text-[26px] smLess:text-[32px] sm:text-[40px] font-semibold text-center ${fontePrincipal}`}>{props.nome}</h1>
-      <div className="relative flex justify-center items-center">
-        <div className="flex flex-col items-center justify-center my-4">
-          <button onClick={scrollLeftHandler}>
-            <div className="w-6 h-6 smLess:w-8 smLess:h-8 sm:w-10 sm:h-10">
-              {iconArrowLeft}
-            </div>
-          </button>
-        </div>
-        <div
-          className="chooseBrand flex gap-2 items-center overflow-x-hidden scrollbar-hide relative cursor-grab"
-          ref={itemsRef}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-        >
-          {props.items.map((brand) => (
-            <div
-              className={`brand flex flex-col items-center  ${hoveredItemId === brand.id ? 'hovered' : ''
-                }`}
-              key={brand.id}
-              onMouseEnter={() => handleItemMouseEnter(brand.id)}
-            >
-              <div className="w-[250px] h-[200px] smLess:w-[300px] smLess:h-[250px] sm:w-[350px] sm:h-[300px] overflow-hidden relative">
-                <img
-                  src={brand.linkImg}
-                  alt={brand.nome}
-                  className={`w-full h-full object-cover transition-transform ${hoveredItemId === brand.id ? 'brightness-50' : 'brightness-100'
-                    }`}
-                  style={{
-                    transform: hoveredItemId === brand.id ? 'scale(1.2)' : 'scale(1)',
-                  }}
-                />
-                <div
-                  className={`text-base font-semibold text-white absolute inset-0 flex justify-center items-center transition-opacity ${hoveredItemId === brand.id ? 'opacity-100' : 'opacity-0'
-                    }`}
-                >
-                  {brand.nome}
+    <section className={`py-1 smLess:py-3 sm:py-5 bg-fourth-neutral`}>
+      <h1 className={`text-[26px] smLess:text-[32px] sm:text-[40px] font-semibold text-center  ${fontePrincipal}`}>
+        <a href={props.url} className="hover:text-second-blue">{props.nome}</a>
+      </h1>
+      <div className="flex justify-center px-10 py-1 smLess:py-3 sm:py-5">
+        <div className="w-full">
+          <Slider {...settings}>
+            {props.items.map((produto: any) => (
+              <div key={produto.id} onMouseLeave={handleMouseLeave} onMouseEnter={() => handleItemMouseEnter(produto.id)} className="flex justify-center items-center gap-4">
+                <div className={`cursor-grab brand flex flex-col items-center  ${hoveredItemId === produto.id ? 'hovered' : ''}`} style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div className="w-[250px] h-[200px] smLess:w-[300px] smLess:h-[250px] sm:w-[350px] sm:h-[300px] overflow-hidden relative">
+                    <img
+                      src={produto.linkImg}
+                      alt={produto.nome}
+                      className={`w-full h-full object-cover transition-transform ${hoveredItemId === produto.id ? 'brightness-50' : 'brightness-100'}`}
+                      style={{
+                        transform: hoveredItemId === produto.id ? 'scale(1.2)' : 'scale(1)'
+                      }} />
+                    <div
+                      className={`text-base font-semibold text-white absolute inset-0 flex justify-center items-center transition-opacity ${hoveredItemId === produto.id ? 'opacity-100' : 'opacity-0'}`}>
+                      {produto.nome}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </Slider>
+          <div className="flex flex-col items-center justify-center pt-8">
+            <span className="text-xs">Deslize para visualizar mais produtos</span>
+          </div>
         </div>
-        <div className="flex flex-col items-center justify-center my-4">
-          <button onClick={scrollRightHandler}>
-            <div className="w-6 h-6 smLess:w-8 smLess:h-8 sm:w-10 sm:h-10">
-              {iconArrowRight}
-            </div>
-          </button>
-        </div>
-        <div className="absolute bottom-0 text-center">
-          <button className="p-1 sm:p-2 m-2 rounded-[10px] bg-opacity-gray hover:bg-second-blue font-semibold text-white">
-            <a href={props.url} className="text-xs sm:text-base" >
-              Visualizar <span className="lowercase">{props.nome}</span>
-            </a>
-          </button>
-        </div>
-      </div>
-      <div className="flex flex-col items-center justify-center">
-        <div className="w-4 h-4 smLess:w-5 smLess:h-5 sm:w-6 sm:h-6">
-          {iconArrowRightAndLeft}
-        </div>
-        <span className="text-xs">Deslize para visualizar mais produtos</span>
+
       </div>
     </section>
   );

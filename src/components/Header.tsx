@@ -4,21 +4,51 @@ import { ItemHeader } from "./ItemHeader";
 import LogoLapidarte2 from '@/assets/logoLapidarte2.png'
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 interface HeaderProps {
   logado?: boolean
 }
 
 export function Header(props: HeaderProps) {
+  const [showOptions, setShowOptions] = useState(false);
+  const [hideElement, setHideElement] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize.width < 640) {
+      setHideElement(true);
+    } else {
+      setHideElement(false);
+    }
+  }, [windowSize]);
 
   function enviarMensagem() {
     whatsAppSubmit("Olá. Gostaria de saber mais sobre os produtos da Marmoraria Lapidarte!");
   }
+
+  const toggleOptions = () => {
+    setShowOptions(!showOptions);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowOptions(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
   const styleIcon = 'h-5 w-5 sm:h-7 sm:w-7';
 
   return (
-    <header className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50" style={{backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)'}}>
+    <header className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50" style={{ backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)' }}>
       <div className="min-w-[28px] min-h-[28px] w-[28px] h-[28px] smLess:min-w-[40px] smLess:min-h-[40px] smLess:w-[40px] smLess:h-[40px]  sm:min-w-[54px] sm:min-h-[54px] sm:w-[54px] sm:h-[54px]">
         <Link href="/" passHref>
           <Image
@@ -28,8 +58,29 @@ export function Header(props: HeaderProps) {
         </Link>
       </div>
       <div className="flex items-center gap-2 sm:gap-4 lg:gap-16">
-        <ItemHeader name="HOME" url="/" />
-        <ItemHeader name="PRODUTOS" url="/produtos" />
+        {!hideElement && <ItemHeader name="HOME" url="/" />}
+        <div className="flex items-center">
+          <ItemHeader name="PRODUTOS" url="/produtos" />
+          <div ref={menuRef} className="relative flex items-center">
+            <button onClick={toggleOptions}>
+              <div className={'h-5 w-5 hover:bg-opacity-10-blue rounded-full'}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#001524" d="m12 15l-5-5h10z" /></svg>
+              </div>
+            </button>
+            {showOptions && (
+              <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 divide-y divide-gray-200 rounded-md shadow-lg z-10">
+                <div className="py-1">
+                  <a href="/marmores" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Mármores</a>
+                  <a href="/granitos" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Granitos</a>
+                  <a href="/quartzos" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Quartzos</a>
+                  <a href="/nobilestone" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">NobileStone</a>
+                </div>
+              </div>
+            )}
+          </div>
+
+        </div>
+
         <ItemHeader name="ORÇAMENTO" url="/solicitar-orcamento" />
       </div>
       <div className="flex gap-1 sm:gap-2">

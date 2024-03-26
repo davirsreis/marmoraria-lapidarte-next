@@ -19,7 +19,7 @@ export default function Orcamento() {
   // const [captchaResolved, setCaptchaResolved] = useState(false);
   const [mensagemSucess, setMensagemSucess] = useState<string[]>(['', '']);
 
-  const production_mode = process.env.NEXT_PUBLIC_PRODUCTION_MODE;
+  // const production_mode = process.env.NEXT_PUBLIC_PRODUCTION_MODE;
   // const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   // useEffect(() => {
@@ -37,7 +37,7 @@ export default function Orcamento() {
   };
 
   function validarFormulario(): boolean {
-    if (!nome || !email || !descricao) {
+    if (!nome || !email || !numeroTelefone || !descricao) {
       exibirErro('Por favor, preencha todos os campos obrigatórios.');
       return false;
     }
@@ -118,7 +118,6 @@ export default function Orcamento() {
           console.log(`Arquivo compactado enviado com sucesso!`);
           getDownloadURL(uploadTask.snapshot.ref)
             .then(async (downloadURL) => {
-              // console.log(`URL de download do arquivo compactado (Esta aqui):`, downloadURL);
               resolve(downloadURL);
             })
             .catch((error) => {
@@ -143,8 +142,7 @@ export default function Orcamento() {
         if (arquivos.length > 0) {
           if (arquivos.some(file => !['.zip', '.rar'].includes(file.name.slice(-4).toLowerCase()))) {
             const urlParaEncurtar = await enviarArquivosParaFirebase(arquivos);
-            // urlArquivo = await encurtarURL(urlParaEncurtar);
-            urlArquivo = urlParaEncurtar;
+            urlArquivo = await encurtarURL(urlParaEncurtar);
           } else {
             await Promise.all(arquivos.map(async (file) => {
               const storageRef = ref(storage, `arquivos/${nome}/${file.name}`);
@@ -169,12 +167,7 @@ export default function Orcamento() {
                     console.log(`Arquivo ${file.name} enviado com sucesso!`);
                     getDownloadURL(uploadTask.snapshot.ref)
                       .then(async (downloadURL) => {
-                        // console.log(`URL de download do arquivo ${file.name}:`, downloadURL);
-
-                        // urlArquivo = await encurtarURL(downloadURL);
-                        console.log(storageRef.fullPath);
-
-                        urlArquivo = downloadURL;
+                        urlArquivo = await encurtarURL(downloadURL);
                         resolve();
                       })
                       .catch((error) => {
@@ -252,7 +245,7 @@ export default function Orcamento() {
         </div>
         <form className="flex flex-col justify-center items-center gap-4 pb-8" onSubmit={(e) => e.preventDefault()}>
           <EntradaForm texto={'Nome'} required valor={nome} valorMudou={setNome} tipo="text" placeholder="Digite o seu nome" />
-          <EntradaForm texto={'Número'} valor={numeroTelefone} valorMudou={setNumeroTelefone} tipo="tel" placeholder="Digite o seu número para contato" onChange={handleChangeTelefone} />
+          <EntradaForm texto={'Número'} required textoComplemento={'(Somente números)'} valor={numeroTelefone} valorMudou={setNumeroTelefone} tipo="tel" placeholder="Digite o seu número para contato" onChange={handleChangeTelefone} />
           <EntradaForm texto={'E-mail'} required valor={email} valorMudou={setEmail} tipo="email" placeholder="Digite o seu e-mail" />
           <EntradaForm texto={'Descrição do orçamento'} required valor={descricao} valorMudou={setDescricao} textarea customClass="h-[160px]" placeholder="Descreva os produtos interessados" />
         </form>
@@ -265,8 +258,8 @@ export default function Orcamento() {
         <div className="flex flex-col justify-center items-center text-justify">
           <div className="w-[350px] smLess:w-[400px] sm:w-[600px]">
             <span className={`text-[20px] text-center font-semibold`}>Envio de arquivos do projeto</span>
-            <p className="text-[16px]">Caso tenha arquivos de projeto nos formatos PNG, JPG, PDF ou compactado (rar ou zip), faça o envio ao início da conversa ou através desse formulário.</p>
-            <p>Se o formato for diferentes ou o tamanho superior, apenas preencha o formulário e encontraremos a melhor forma de envio para os arquivos</p>
+            <p className="text-[16px]">Caso tenha arquivos de projeto nos formatos PNG, JPG, PDF ou compactado (rar ou zip), <span className="text-second-blue font-semibold">faça o envio ao início da conversa ou através desse formulário.</span></p>
+            <p>Se o formato for diferente ou o tamanho superior, apenas preencha o formulário e encontraremos a melhor forma de envio para os arquivos</p>
           </div>
         </div>
 
