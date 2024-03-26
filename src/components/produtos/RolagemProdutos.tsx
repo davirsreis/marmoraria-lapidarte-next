@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { iconArrowLeft, iconArrowRight, iconArrowRightAndLeft } from "../icons";
+import { useEffect, useState } from "react";
 import { fontePrincipal } from "@/Auxiliares/fontes";
 import Slider from "react-slick";
 import { useWindowSize } from "@/hooks/useWindowSize";

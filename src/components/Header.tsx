@@ -70,10 +70,11 @@ export function Header(props: HeaderProps) {
             {showOptions && (
               <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 divide-y divide-gray-200 rounded-md shadow-lg z-10">
                 <div className="py-1">
-                  <a href="/marmores" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Mármores</a>
-                  <a href="/granitos" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Granitos</a>
-                  <a href="/quartzos" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Quartzos</a>
-                  <a href="/nobilestone" className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">NobileStone</a>
+                  <Link href={'/marmores'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Mármores</span></Link>
+                  <Link href={'/granitos'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Granitos</span></Link>
+                  <Link href={'/quartzos'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Quartzos</span></Link>
+                  <Link href={'/nobilestone'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">NobileStone</span></Link>
+
                 </div>
               </div>
             )}
