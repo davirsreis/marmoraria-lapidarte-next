@@ -80,7 +80,7 @@ export function RolagemProdutos(props: RolagemProdutosProps) {
   };
 
   return (
-    <section className={`py-1 smLess:py-3 sm:py-5 bg-fourth-neutral`}>
+    <section className={`py-1 smLess:py-3 sm:py-5 ${props.customClass}`}>
       <h1 className={`text-[26px] smLess:text-[32px] sm:text-[40px] font-semibold text-center  ${fontePrincipal}`}>
         <a href={props.url} className="hover:text-second-blue">{props.nome}</a>
       </h1>
@@ -107,9 +107,6 @@ export function RolagemProdutos(props: RolagemProdutosProps) {
               </div>
             ))}
           </Slider>
-          <div className="flex flex-col items-center justify-center pt-8">
-            <span className="text-xs">Deslize para visualizar mais produtos</span>
-          </div>
         </div>
 
       </div>

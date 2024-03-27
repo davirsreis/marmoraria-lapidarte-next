@@ -62,7 +62,7 @@ export default function Produtos() {
 
           {(produtosFiltradosGranito.length == 0)
             ? null
-            : <RolagemProdutos nome="Granitos" url="/granitos" items={produtosFiltradosGranito} customClass={'bg-fourth-neutral'} />}
+            : <RolagemProdutos nome="Granitos" url="/granitos" items={produtosFiltradosGranito} customClass={'bg-third-neutral'} />}
 
           {(produtosFiltradosQuartzo.length == 0)
             ? null
@@ -70,7 +70,7 @@ export default function Produtos() {
 
           {(produtosFiltradosNobileStone.length == 0)
             ? null
-            : <RolagemProdutos nome="NobileStone" url="/nobilestone" items={produtosFiltradosNobileStone} customClass={'bg-fourth-neutral'} />}
+            : <RolagemProdutos nome="NobileStone" url="/nobilestone" items={produtosFiltradosNobileStone} customClass={'bg-third-neutral'} />}
         </>
       )
       }
