@@ -8,7 +8,7 @@ export function SectionContato() {
     <section className="w-full bg-img_bg_fundo_contato bg-no-repeat bg-center bg-cover flex justify-center items-center py-[80px] smLess:py-[100px] sm:py-[120px]">
       <div className="flex flex-col lgPlus:flex-row justify-evenly gap-12 smLess:gap-14 sm:gap-20">
         <div className="w-[350px] smLess:w-[400px] sm:w-[564px]">
-          <h1 className={`text-[26px] smLess:text-[30px] sm:text-[38px] text-primary-blue font-semibold mb-4 text-center bg-opacity-60-neutral rounded-[10px] ${fontePrincipal}`}>Fale com nossos consultores</h1>
+          <h1 className={`text-[24px] smLess:text-[28px] sm:text-[38px] text-primary-blue font-semibold mb-4 text-center bg-opacity-60-neutral rounded-[10px] ${fontePrincipal}`}>Fale com nossos consultores</h1>
           <p className={`text-base smLess:text-[18px] sm:text-[20px] text-white leading-relaxed font-bold text-justify ${fontePrincipal}`}>Estamos à disposição para ajudar. Entre em contato conosco através do número/e-mail ou preencha nosso formulário para obter um orçamento personalizado para o seu projeto.</p>
           <div className="flex justify-center items-center pt-[30px] smLess:pt-[40px] sm:pt-[70px]">
             <Link href={"solicitar-orcamento"} passHref>

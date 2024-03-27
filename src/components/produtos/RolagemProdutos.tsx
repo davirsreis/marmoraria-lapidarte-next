@@ -80,11 +80,11 @@ export function RolagemProdutos(props: RolagemProdutosProps) {
   };
 
   return (
-    <section className={`py-1 smLess:py-3 sm:py-5 ${props.customClass}`}>
+    <section className={`py-4 smLess:py-6 sm:py-8 ${props.customClass}`}>
       <h1 className={`text-[26px] smLess:text-[32px] sm:text-[40px] font-semibold text-center  ${fontePrincipal}`}>
         <a href={props.url} className="hover:text-second-blue">{props.nome}</a>
       </h1>
-      <div className="flex justify-center px-10 py-1 smLess:py-3 sm:py-5">
+      <div className="flex justify-center px-10 pt-4 smLess:pt-6 sm:pt-8">
         <div className="w-full">
           <Slider {...settings}>
             {props.items.map((produto: any) => (

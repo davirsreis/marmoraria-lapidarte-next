@@ -72,7 +72,7 @@ export function ProdutoSeparado(props: ProdutoSeparadoProps) {
               </div>
             </div>
           </section>
-          <section className="flex flex-col justify-center items-center py-12 smLess:py-16 sm:py-20">
+          <section className="flex flex-col justify-center items-center py-8 smLess:py-12 sm:py-16">
             <p className={`text-[22px] smLess:text-[28px] sm:text-[32px] ${fontePrincipal}`}>Os <span className="lowercase">{props.nome}</span> são <span className="text-second-blue">ideais</span> para:</p>
             <div className="w-[300px] sm:w-[700px] flex flex-col sm:flex-row gap-4 smLess:gap-8 sm:gap-12 justify-center items-center pt-10">
               <Card textoCard={props.card1} path={props.path1} />
@@ -82,8 +82,8 @@ export function ProdutoSeparado(props: ProdutoSeparadoProps) {
           </section>
           {dadosFiltrados.length == 0
             ? null
-            : <section className="py-12 smLess:py-16 sm:py-20 bg-third-neutral" ref={referencia}>
-              <h2 className={`text-center text-[28px] smLess:text-[32px] sm:text-[40px] uppercase font-semibold pb-[45px] smLess:pb-[75px] sm:pb-[100px] ${fontePrincipal}`}>{props.nome}</h2>
+            : <section className="py-8 smLess:py-12 sm:py-16 bg-third-neutral" ref={referencia}>
+              <h2 className={`text-center text-[28px] smLess:text-[32px] sm:text-[40px] uppercase font-semibold pb-[32px] smLess:pb-[48px] sm:pb-[64px] ${fontePrincipal}`}>{props.nome}</h2>
               <div className="flex justify-center">
                 <ExibirProdutos produtos={dadosFiltrados} tipoPedra={props.tipoPedra} />
               </div>

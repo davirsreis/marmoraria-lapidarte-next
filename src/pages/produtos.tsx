@@ -44,8 +44,8 @@ export default function Produtos() {
       ) : (
         <>
           <section className="flex flex-col w-full bg-third-neutral">
-            <h2 className={`text-[20px] smLess:text-[24px] sm:text-[44px] font-semibold text-center pt-[80px] smLess:pt-[100px] sm:pt-[120px] ${fontePrincipal}`}>CONHEÇA NOSSOS PRODUTOS!</h2>
-            <ul className={`flex text-xs smLess:text-[14px] sm:text-xl py-5 smLess:py-10 sm:py-20 gap-1 smLess:gap-2 sm:gap-4 text-center justify-center text-second-blue font-semibold tracking-[0.05em] smLess:tracking-[0.05em] sm:tracking-[0.1em] ${fontePrincipal}`}>
+            <h2 className={`text-[20px] smLess:text-[24px] sm:text-[44px] font-semibold text-center pt-[80px] smLess:pt-[98px] sm:pt-[128px] ${fontePrincipal}`}>CONHEÇA NOSSOS PRODUTOS!</h2>
+            <ul className={`flex text-xs smLess:text-[14px] sm:text-xl py-8 smLess:py-12 sm:py-16 gap-1 smLess:gap-2 sm:gap-4 text-center justify-center text-second-blue font-semibold tracking-[0.05em] smLess:tracking-[0.05em] sm:tracking-[0.1em] ${fontePrincipal}`}>
               <li><nav className="hover:text-primary-blue"><Link href={'/marmores'} passHref>Mármores</Link></nav></li>
               <span>|</span>
               <li><nav className="hover:text-primary-blue"><Link href={'/granitos'} passHref>Granitos</Link></nav></li>
