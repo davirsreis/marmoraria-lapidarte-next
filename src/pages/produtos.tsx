@@ -50,7 +50,7 @@ export default function Produtos() {
               <span>|</span>
               <li><nav className="hover:text-primary-blue"><Link href={'/granitos'} passHref>Granitos</Link></nav></li>
               <span>|</span>
-              <li><nav className="hover:text-primary-blue"><Link href={'/quartzitos'} passHref>Quartzos</Link></nav></li>
+              <li><nav className="hover:text-primary-blue"><Link href={'/quartzitos'} passHref>Quartzitos</Link></nav></li>
               <span>|</span>
               <li><nav className="hover:text-primary-blue"><Link href={'/nobilestone'} passHref>NobileStone</Link></nav></li>
             </ul>
