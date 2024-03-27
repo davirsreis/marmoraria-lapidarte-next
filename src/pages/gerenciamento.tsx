@@ -38,14 +38,14 @@ export default function Gerenciamento() {
               <Botao
                 cor="azulAlternativo"
                 onClick={enviarArquivoJSON}
-                customClass="w-[200px] p-2 sm:p-4"
+                customClass="w-[150px] smLess:w-[200px] p-2 sm:p-4"
               >
                 Atualizar dados
               </Botao>
               <Botao
                 cor="azulAlternativo"
                 onClick={novoProduto}
-                customClass="w-[200px] p-2 sm:p-4"
+                customClass="w-[150px] smLess:w-[200px] p-2 sm:p-4"
               >
                 Registrar item
               </Botao>

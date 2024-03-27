@@ -4,11 +4,8 @@ import { fontePrincipal } from "@/Auxiliares/fontes";
 import { Slash } from "@/components/Slash";
 import Link from "next/link";
 import { RolagemProdutos } from "@/components/produtos/RolagemProdutos";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { iconArrowRight, iconArrowRightAndLeft } from "@/components/icons";
-import { useWindowSize } from "@/hooks/useWindowSize";
 
 export default function Produtos() {
   const [dadosProdutos, setDadosProdutos] = useState<any[]>([]);
@@ -16,7 +13,6 @@ export default function Produtos() {
   const [produtosFiltradosGranito, setProdutosFiltradosGranito] = useState<any[]>([]);
   const [produtosFiltradosQuartzo, setProdutosFiltradosQuartzo] = useState<any[]>([]);
   const [produtosFiltradosNobileStone, setProdutosFiltradosNobileStone] = useState<any[]>([]);
-  const [hoveredItemId, setHoveredItemId] = useState<number | null>(null);
   const dados = useContext(ProdutoContext);
 
   useEffect(() => {
@@ -25,83 +21,21 @@ export default function Produtos() {
     }
   }, [dados]);
 
-  const [slidesToShow, setSlidesToShow] = useState(5);
-  const [slidesToScroll, setSlidesToScroll] = useState(2.5);
-  const windowSize = useWindowSize();
-
-  useEffect(() => {
-    if (windowSize.width < 376) {
-      setSlidesToShow(1.05);
-      setSlidesToScroll(1);
-    } else if (windowSize.width < 475) {
-      setSlidesToShow(1.05);
-      setSlidesToScroll(1);
-    } else if (windowSize.width < 540) {
-      setSlidesToShow(1.3);
-      setSlidesToScroll(1.3);
-    } else if (windowSize.width < 640) {
-      setSlidesToShow(1.5);
-      setSlidesToScroll(1.5);
-    } else if (windowSize.width < 810) {
-      setSlidesToShow(1.5);
-      setSlidesToScroll(1.5);
-    } else if (windowSize.width < 970) {
-      setSlidesToShow(2.1);
-      setSlidesToScroll(2.5);
-    } else if (windowSize.width < 1170) {
-      setSlidesToShow(2.5);
-      setSlidesToScroll(2.5);
-    } else if (windowSize.width < 1320) {
-      setSlidesToShow(3.1);
-      setSlidesToScroll(2.5);
-    } else if (windowSize.width < 1520) {
-      setSlidesToShow(3.5);
-      setSlidesToScroll(3);
-    } else if (windowSize.width < 1680) {
-      setSlidesToShow(4.1);
-      setSlidesToScroll(3);
-    } else if (windowSize.width < 1880) {
-      setSlidesToShow(4.5);
-      setSlidesToScroll(3);
-    } else {
-      setSlidesToShow(5.1);
-      setSlidesToScroll(3);
-    }
-  }, [windowSize]);
-
   useEffect(() => {
     if (dadosProdutos.length > 0) {
       const produtosFiltradosMarmore = dadosProdutos.filter(produto => produto.pedra === 'Marmore');
       setProdutosFiltradosMarmore(produtosFiltradosMarmore);
-      console.log(produtosFiltradosMarmore);
 
       const produtosFiltradosGranito = dadosProdutos.filter(produto => produto.pedra === 'Granito');
       setProdutosFiltradosGranito(produtosFiltradosGranito);
 
-      const produtosFiltradosQuartzo = dadosProdutos.filter(produto => produto.pedra === 'Quartzo');
+      const produtosFiltradosQuartzo = dadosProdutos.filter(produto => produto.pedra === 'Quartzito');
       setProdutosFiltradosQuartzo(produtosFiltradosQuartzo);
 
       const produtosFiltradosNobileStone = dadosProdutos.filter(produto => produto.pedra === 'NobileStone');
       setProdutosFiltradosNobileStone(produtosFiltradosNobileStone);
     }
   }, [dadosProdutos]);
-
-  var settings = {
-    dots: true,
-    speed: 500,
-    slidesToShow: slidesToShow,
-    slidesToScroll: slidesToScroll,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredItemId(null);
-  };
-  const handleItemMouseEnter = (itemId: number) => {
-    setHoveredItemId(itemId);
-  };
 
   return (
     <>
@@ -132,7 +66,7 @@ export default function Produtos() {
 
           {(produtosFiltradosQuartzo.length == 0)
             ? null
-            : <RolagemProdutos nome="Quartzos" url="/quartzos" items={produtosFiltradosQuartzo} customClass={'bg-fourth-neutral'} />}
+            : <RolagemProdutos nome="Quartzitos" url="/quartzitos" items={produtosFiltradosQuartzo} customClass={'bg-fourth-neutral'} />}
 
           {(produtosFiltradosNobileStone.length == 0)
             ? null

@@ -1,7 +1,8 @@
 import { IconeEdit, IconeTrash } from "./Icones";
 import Produto from "../../core/Produto";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 interface TabelaProps {
   produtos?: Produto[];
@@ -13,6 +14,18 @@ export default function Tabela(props: TabelaProps) {
   const exibirAcoes = props.produtoExcluido || props.produtoSelecionado;
   const [confirmacaoExclusao, setConfirmacaoExclusao] = useState(false);
   const [produtoExcluindo, setProdutoExcluindo] = useState<Produto | null>(null);
+  const [size, setSize] = useState(72);
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize.width < 376) {
+      setSize(52);
+    } else if (windowSize.width < 400) {
+      setSize(64);
+    } else {
+      setSize(72);
+    }
+  }, [windowSize]);
 
   function abrirConfirmacaoExclusao(produto: Produto) {
     setProdutoExcluindo(produto);
@@ -52,12 +65,28 @@ export default function Tabela(props: TabelaProps) {
         <tr key={produto.id} className={`${i % 2 === 0 ? 'bg-fifth-neutral' : 'bg-primary-neutral'}`}>
           <td className={`${tdClass} text-left sm:p-4`}>{produto.nome}</td>
           <td className={`${tdClass} text-center sm:text-left sm:p-4`}>{produto.pedra}</td>
-          <td className={`${tdClass} flex justify-center items-center`}><div className="h-[42px] w-[42px] smLess:h-[48px] smLess:w-[48px] sm:h-[52px] sm:w-[52px]"><Image src={produto.linkImg} alt="" width={52} height={52} /></div></td>
+          <td className={`${tdClass} flex justify-center items-center relative`}>
+            <div className="flex justify-center items-center h-[52px] w-[52px] smLess:h-[64px] smLess:w-[64px] sm:h-[72px] sm:w-[72px] bg-gray-200">
+              <div className="w-full pt-[100%] relative">
+                <Image src={produto.linkImg} alt={produto.nome} width={size} height={size}  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+            </div>
+          </td>
           {exibirAcoes && <td>{renderizarAcoes(produto)}</td>}
         </tr>
       );
     });
   }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   function renderizarAcoes(produto: Produto) {
     const style = `

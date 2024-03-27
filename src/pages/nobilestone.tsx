@@ -11,9 +11,9 @@ export default function NobileStone() {
       card1="Bancadas de cozinha"
       card2="Revestimento de banheiros"
       card3="Pisos de Áreas Nobres"
-      path1="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FcozinhaIcon2.png?alt=media&token=cec2ba50-0f91-46a8-8453-bb418bf2c344"
-      path2="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FbanheiroIcon2.png?alt=media&token=b6a3fc15-3b6f-408a-86ab-bccdb6d3379f"
-      path3="https://firebasestorage.googleapis.com/v0/b/marmorarialapidarteofc.appspot.com/o/imagensAplicacao%2FpisoIconColorido.png?alt=media&token=a8026d2d-9b8d-49a7-a714-d575c58d3a5b"
+      path1="https://firebasestorage.googleapis.com/v0/b/marmoraria-lapidarte.appspot.com/o/imagensDaAplicacao%2FcozinhaIcon2.png?alt=media&token=70bb71bf-8ca8-4408-b5ee-c8b8bd637264"
+      path2="https://firebasestorage.googleapis.com/v0/b/marmoraria-lapidarte.appspot.com/o/imagensDaAplicacao%2FbanheiroIcon2.png?alt=media&token=1c697fcb-baec-43c6-8d85-233fdc5fcb50"
+      path3="https://firebasestorage.googleapis.com/v0/b/marmoraria-lapidarte.appspot.com/o/imagensDaAplicacao%2FpisoIconColorido.png?alt=media&token=39b13fb6-a221-4cfb-a33d-d17e18c0c973"
       tipoPedra="NobileStone"
     />
   )

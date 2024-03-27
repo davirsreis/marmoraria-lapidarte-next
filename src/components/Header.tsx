@@ -34,6 +34,14 @@ export function Header(props: HeaderProps) {
     setShowOptions(!showOptions);
   };
 
+  const handleMenuItemClick = () => {
+    setShowOptions(false);
+  };
+
+  function handleScroll() {
+    setShowOptions(false);
+  }
+
   useEffect(() => {
     function handleClickOutside(event: any) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -41,11 +49,14 @@ export function Header(props: HeaderProps) {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("scroll", handleScroll);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("scroll", handleScroll);
     };
   }, [menuRef]);
   const styleIcon = 'h-5 w-5 sm:h-7 sm:w-7';
+  const styleSubMenuItems = 'block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100';
 
   return (
     <header className="w-full h-16 sm:h-20 bg-primary-neutral flex items-center justify-evenly sm:px-6 fixed z-50" style={{ backdropFilter: 'blur(10px)', backgroundColor: 'rgba(255, 236, 209, 0.6)' }}>
@@ -70,10 +81,10 @@ export function Header(props: HeaderProps) {
             {showOptions && (
               <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 divide-y divide-gray-200 rounded-md shadow-lg z-10">
                 <div className="py-1">
-                  <Link href={'/marmores'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Mármores</span></Link>
-                  <Link href={'/granitos'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Granitos</span></Link>
-                  <Link href={'/quartzos'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">Quartzos</span></Link>
-                  <Link href={'/nobilestone'} passHref><span className="block px-4 py-2 text-sm sm:text-base text-gray-700 hover:bg-gray-100">NobileStone</span></Link>
+                  <Link href={'/marmores'} passHref><span className={styleSubMenuItems} onClick={handleMenuItemClick}>Mármores</span></Link>
+                  <Link href={'/granitos'} passHref><span className={styleSubMenuItems} onClick={handleMenuItemClick}>Granitos</span></Link>
+                  <Link href={'/quartzitos'} passHref><span className={styleSubMenuItems} onClick={handleMenuItemClick}>Quartzitos</span></Link>
+                  <Link href={'/nobilestone'} passHref><span className={styleSubMenuItems} onClick={handleMenuItemClick}>NobileStone</span></Link>
 
                 </div>
               </div>

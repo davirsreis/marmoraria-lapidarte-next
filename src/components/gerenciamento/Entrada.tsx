@@ -7,6 +7,7 @@ interface EntradaProps {
   placeHolder?: string
   isSelection?: boolean
   selections?: string[]
+  accept?: any
   disabled?: boolean
   valorMudou?: (valor: any) => void
 }
@@ -43,6 +44,7 @@ export default function Entrada(props: EntradaProps) {
         <input
           type={props.tipo ?? 'text'}
           value={props.valor}
+          accept={props.accept}
           readOnly={props.somenteLeitura}
           placeholder={props.placeHolder}
           onChange={e => props.valorMudou?.(e.target.value)}

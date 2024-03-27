@@ -20,7 +20,7 @@ export default function Formulario(props: FormularioProps) {
   const [progressPorcent, setPorgessPorcent] = useState(0);
   const [alterandoImagem, setAlterandoImagem] = useState(true);
 
-  const pedras = ['Marmore', 'Granito', 'Quartzo']
+  const pedras = ['Marmore', 'Granito', 'Quartzito', 'NobileStone']
 
   useEffect(() => {
     if (props.produto) {
@@ -81,20 +81,22 @@ export default function Formulario(props: FormularioProps) {
           <span className="flex justify-center items-center text-sm">Todos os elementos são obrigatórios</span>
           <Entrada texto="Nome" placeHolder="Digite o nome" valor={nome} valorMudou={setNome} className="mb-5" />
           <Entrada texto="Pedra" isSelection selections={pedras} placeHolder="Digite o tipo de pedra" valor={pedra} valorMudou={setPedra} className="mb-5" />
-          {id
+          {id && imgURL
             ? <div className="flex flex-col justify-center items-center">
               <span className="font-bold py-2">Imagem</span>
-              <div className="h-[200px] w-[200px]">
-                <Image src={imgURL} alt="Imagem" width={200} height={200} />
+              <div className="flex justify-center items-center h-[200px] w-[200px]">
+                <div className="w-full pt-[100%] relative">
+                  <Image src={imgURL} alt={nome} width={200} height={200} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
               </div>
               <button className="p-2 underline" onClick={handleAlterandoImagem}>Dejesa alterar a imagem?</button>
               {alterandoImagem
                 ? null
-                : <Entrada tipo="file" disabled={alterandoImagem} />
+                : <Entrada accept={".jpg, .jpeg, .png"} tipo="file" disabled={alterandoImagem} />
               }
 
             </div>
-            : <Entrada tipo="file" />}
+            : <Entrada accept={".jpg, .jpeg, .png"} tipo="file" />}
           {!imgURL && <p>{progressPorcent}%</p>}
           <div className=" flex justify-end mt-5 gap-2">
             <Botao cor="verde" customClass="w-[100px] p-2 sm:p-4">

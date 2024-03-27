@@ -5,11 +5,11 @@ import ColecaoProduto from "../firebase/db/ColecaoProduto"
 import useTabelaOuForm from "./useTabelaOuForm"
 
 export default function useProdutos() {
-  const repo: ProdutoRepositorio = new ColecaoProduto()
+  const repo: ProdutoRepositorio = new ColecaoProduto();
 
-  const { tabelaVisivel, exibirTabela, exibirFormulario } = useTabelaOuForm()
-  const [produto, setProduto] = useState<Produto>(Produto.vazio())
-  const [produtos, setProdutos] = useState<Produto[]>([])
+  const { tabelaVisivel, exibirTabela, exibirFormulario } = useTabelaOuForm();
+  const [produto, setProduto] = useState<Produto>(Produto.vazio());
+  const [produtos, setProdutos] = useState<Produto[]>([]);
 
   useEffect(() => {
     if (tabelaVisivel) {
@@ -18,30 +18,56 @@ export default function useProdutos() {
   }, [tabelaVisivel]);
 
   function obterTodos() {
-    repo.obterTodos().then(produtos => {
-      setProdutos(produtos)
-      exibirTabela()
-    })
+    try {
+      repo.obterTodos().then(produtos => {
+        setProdutos(produtos)
+        exibirTabela()
+      })
+    } catch (error) {
+      alert('Ocorreu um erro durante o processo!')
+      console.log(error);
+    }
   }
 
   function selecionarProduto(produto: Produto) {
-    setProduto(produto)
-    exibirFormulario()
+    try {
+      setProduto(produto)
+      exibirFormulario()
+    } catch (error) {
+      alert('Ocorreu um erro durante o processo!')
+      console.log(error);
+    }
   }
 
   async function excluirProduto(produto: Produto) {
-    await repo.excluir(produto)
-    obterTodos()
+    try {
+      await repo.excluir(produto)
+      obterTodos()
+    } catch (error) {
+      alert('Ocorreu um erro durante o processo!')
+      console.log(error);
+    }
   }
 
   function novoProduto() {
-    setProduto(Produto.vazio())
-    exibirFormulario()
+    try {
+      setProduto(Produto.vazio())
+      exibirFormulario()
+    } catch (error) {
+      alert('Ocorreu um erro durante o processo!')
+      console.log(error);
+    }
+
   }
 
   async function salvarProduto(produto: Produto) {
-    await repo.salvar(produto)
-    obterTodos()
+    try {
+      await repo.salvar(produto)
+      obterTodos()
+    } catch (error) {
+      alert('Ocorreu um erro durante o processo!')
+      console.log(error);
+    }
   }
 
   return {
