@@ -12,6 +12,7 @@ Este é o repositório da aplicação da Marmoraria Lapidarte, desenvolvida para
 ## Link da aplicação
 
 Visite a [marmorarialapidarte.com.br](https://marmorarialapidarte.com.br/) para experimentar a aplicação em funcionamento.
+<a href="https://marmorarialapidarte.com.br/" target="_blank">Visite a marmorarialapidarte.com.br</a>
 
 ## Tecnologias utilizadas
 * Next.js 14.1.0
