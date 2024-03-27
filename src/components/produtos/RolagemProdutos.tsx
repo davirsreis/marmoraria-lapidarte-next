@@ -25,28 +25,28 @@ export function RolagemProdutos(props: RolagemProdutosProps) {
   useEffect(() => {
     if (windowSize.width < 376) {
       setSlidesToShow(1.05);
-      setSlidesToScroll(1.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 475) {
       setSlidesToShow(1.05);
-      setSlidesToScroll(1.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 540) {
       setSlidesToShow(1.3);
-      setSlidesToScroll(1.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 640) {
       setSlidesToShow(1.5);
-      setSlidesToScroll(1.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 810) {
       setSlidesToShow(1.5);
-      setSlidesToScroll(1.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 970) {
       setSlidesToShow(2.1);
-      setSlidesToScroll(2.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 1170) {
       setSlidesToShow(2.5);
-      setSlidesToScroll(2.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 1320) {
       setSlidesToShow(3.1);
-      setSlidesToScroll(2.5);
+      setSlidesToScroll(3);
     } else if (windowSize.width < 1520) {
       setSlidesToShow(3.5);
       setSlidesToScroll(3);
