@@ -257,7 +257,6 @@ export default function Orcamento() {
   );
 }
 
-
 function removeEspacos(texto: any) {
   return texto.replace(/\s+/g, '');
 }
