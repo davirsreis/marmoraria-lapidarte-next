@@ -128,7 +128,7 @@ export default function Orcamento() {
           }
         }
 
-        const url = `www.marmorarialapidarte.com.br/api/baixar-arquivo/${nomeArquivo}`;
+        const url = `https://marmorarialapidarte.com.br/api/baixar-arquivo/${nomeArquivo}`;
         whatsAppSubmitForm(nome, numeroTelefone, email, descricao, url);
 
         setNome('');
