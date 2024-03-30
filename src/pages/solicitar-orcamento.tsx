@@ -2,11 +2,10 @@ import { formatarTelefone, whatsAppSubmitForm } from "@/Auxiliares/functions";
 import { EntradaForm } from "@/components/orcamento/EntradaForm";
 import { fontePrincipal } from "@/Auxiliares/fontes";
 import { Botao } from "@/components/Botao";
-import { useEffect, useState } from "react";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { useState } from "react";
+import { listAll, deleteObject, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "@/firebase/config";
 import JSZip from 'jszip';
-// import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Orcamento() {
   const [numeroTelefone, setNumeroTelefone] = useState('');
@@ -16,19 +15,7 @@ export default function Orcamento() {
   const [erroFormulario, setErroFormulario] = useState<string | null>(null);
   const [arquivos, setArquivos] = useState<File[]>([]);
   const [progressPorcent, setPorgessPorcent] = useState(0);
-  // const [captchaResolved, setCaptchaResolved] = useState(false);
   const [mensagemSucess, setMensagemSucess] = useState<string[]>(['', '']);
-
-  // const production_mode = process.env.NEXT_PUBLIC_PRODUCTION_MODE;
-  // const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
-  // useEffect(() => {
-  //   if (production_mode == 'dev') { setCaptchaResolved(true) };
-  // }, [])
-
-  // function handleCaptchaChange(value: any) {
-  //   setCaptchaResolved(!!value);
-  // }
 
   const handleChangeTelefone = (event: any) => {
     const valorDigitado = event.target.value;
@@ -65,41 +52,12 @@ export default function Orcamento() {
     return conteudoZip;
   }
 
-  async function encurtarURL(urlOriginal: string) {
-    const apiUrl = 'https://api.tinyurl.com/create';
-    const apiKey = process.env.NEXT_PUBLIC_TINYURL_API_KEY;
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          url: urlOriginal,
-          domain: 'tinyurl.com'
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao encurtar URL');
-      }
-
-      const data = await response.json();
-      return data.data.tiny_url;
-    } catch (error) {
-      console.error('Erro ao encurtar URL:', error);
-      throw error;
-    }
-  }
-
-  async function enviarArquivosParaFirebase(arquivos: File[]) {
+  async function enviarArquivosParaFirebase(arquivos: File[], nomeArquivo: string) {
     const arquivoCompactado = await compactarArquivos(arquivos);
-    const storageRef = ref(storage, `arquivos/${nome}/arquivo.zip`);
+    const storageRef = ref(storage, `arquivos/${nomeArquivo}.zip`);
     const uploadTask = uploadBytesResumable(storageRef, arquivoCompactado);
-    return new Promise<string>((resolve, reject) => {
+
+    return new Promise<void>((resolve, reject) => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -116,36 +74,33 @@ export default function Orcamento() {
         },
         () => {
           console.log(`Arquivo compactado enviado com sucesso!`);
-          getDownloadURL(uploadTask.snapshot.ref)
-            .then(async (downloadURL) => {
-              resolve(downloadURL);
-            })
-            .catch((error) => {
-              console.error(`Erro ao obter a URL de download do arquivo compactado:`, error);
-              reject(error);
-            });
+          resolve();
         }
       );
     });
   }
 
   async function enviarMensagem() {
-    // if (!captchaResolved) {
-    //   setMensagemSucess(['Por favor, complete o reCAPTCHA.', 'danger']);
-    //   return;
-    // }
     if (validarFormulario()) {
       setErroFormulario('');
-      let urlArquivo: string | undefined;
+      const nomeArquivo = gerarNomeArquivo(nome);
 
       try {
         if (arquivos.length > 0) {
+
+          const { espacoOcupado, numeroArquivos } = await verificarEspacoOcupado('arquivos');
+          const limite = 5 * 1024 * 1024 * 1024 * 0.5;
+          const limiteNumeroArquivos = 30;
+
+          if ((espacoOcupado > limite) || numeroArquivos > limiteNumeroArquivos) {
+            excluirArquivoMaisAntigo();
+          }
+
           if (arquivos.some(file => !['.zip', '.rar'].includes(file.name.slice(-4).toLowerCase()))) {
-            const urlParaEncurtar = await enviarArquivosParaFirebase(arquivos);
-            urlArquivo = await encurtarURL(urlParaEncurtar);
+            await enviarArquivosParaFirebase(arquivos, nomeArquivo);
           } else {
             await Promise.all(arquivos.map(async (file) => {
-              const storageRef = ref(storage, `arquivos/${nome}/${file.name}`);
+              const storageRef = ref(storage, `arquivos/${nomeArquivo}`);
               const uploadTask = uploadBytesResumable(storageRef, file);
 
               await new Promise<void>((resolve, reject) => {
@@ -165,22 +120,16 @@ export default function Orcamento() {
                   },
                   async () => {
                     console.log(`Arquivo ${file.name} enviado com sucesso!`);
-                    getDownloadURL(uploadTask.snapshot.ref)
-                      .then(async (downloadURL) => {
-                        urlArquivo = await encurtarURL(downloadURL);
-                        resolve();
-                      })
-                      .catch((error) => {
-                        console.error(`Erro ao obter a URL de download do arquivo ${file.name}:`, error);
-                        reject(error);
-                      });
+                    resolve();
                   }
                 );
               });
             }));
           }
         }
-        whatsAppSubmitForm(nome, numeroTelefone, email, descricao, urlArquivo);
+
+        const url = `www.marmorarialapidarte.com.br/api/baixar-arquivo/${nomeArquivo}`;
+        whatsAppSubmitForm(nome, numeroTelefone, email, descricao, url);
 
         setNome('');
         setNumeroTelefone('');
@@ -199,8 +148,6 @@ export default function Orcamento() {
       }
     }
   }
-
-
 
   function handleEnviarArquivo(event: React.ChangeEvent<HTMLInputElement>) {
     const maxSizeInBytes = 134217728; // 128 MB
@@ -244,7 +191,7 @@ export default function Orcamento() {
           )}
         </div>
         <form className="flex flex-col justify-center items-center gap-4 pb-8" onSubmit={(e) => e.preventDefault()}>
-          <EntradaForm texto={'Nome'} required valor={nome} valorMudou={setNome} tipo="text" placeholder="Digite o seu nome" />
+          <EntradaForm texto={'Nome'} id="nome" required valor={nome} valorMudou={setNome} tipo="text" placeholder="Digite o seu nome" />
           <EntradaForm texto={'Número'} required textoComplemento={'(Somente números)'} valor={numeroTelefone} valorMudou={setNumeroTelefone} tipo="tel" placeholder="Digite o seu número para contato" onChange={handleChangeTelefone} />
           <EntradaForm texto={'E-mail'} required valor={email} valorMudou={setEmail} tipo="email" placeholder="Digite o seu e-mail" />
           <EntradaForm texto={'Descrição do orçamento'} required valor={descricao} valorMudou={setDescricao} textarea customClass="h-[160px]" placeholder="Descreva os produtos interessados" />
@@ -296,17 +243,6 @@ export default function Orcamento() {
         )}
       </div>
 
-      {/* {(production_mode == 'production')
-        ?
-        <div className="flex justify-center items-center">
-          <ReCAPTCHA
-            sitekey={recaptcha_key ?? ''}
-            onChange={handleCaptchaChange}
-          />
-        </div>
-        : null
-      } */}
-
       {!mensagemSucess &&
         <div className="flex justify-center items-center">
           {mensagemSucess[1] == 'alert'
@@ -320,3 +256,65 @@ export default function Orcamento() {
     </section>
   );
 }
+
+
+function removeEspacos(texto: any) {
+  return texto.replace(/\s+/g, '');
+}
+
+function gerarNomeArquivo(nome: any) {
+  const nomeSemEspacos = removeEspacos(nome.toLowerCase());
+  const timestamp = Date.now();
+  return nomeSemEspacos + '-' + timestamp;
+}
+
+async function excluirArquivoMaisAntigo() {
+  const storageRef = ref(storage, 'arquivos');
+  try {
+    const listResult = await listAll(storageRef);
+
+    let arquivoMaisAntigo = null;
+    let dataMaisAntiga = Infinity;
+
+    for (const itemRef of listResult.items) {
+      const fileName = itemRef.name;
+      const fileTimestamp = parseInt(fileName.split('-')[1]);
+
+      if (fileTimestamp < dataMaisAntiga) {
+        arquivoMaisAntigo = itemRef;
+        dataMaisAntiga = fileTimestamp;
+      }
+    }
+
+    if (arquivoMaisAntigo) {
+      await deleteObject(arquivoMaisAntigo);
+      console.log('Arquivo mais antigo excluído!');
+    } else {
+      console.log('Nenhum arquivo encontrado para exclusão.');
+    }
+  } catch (error) {
+    console.error('Erro ao excluir arquivo mais antigo:', error);
+    throw error;
+  }
+}
+
+async function verificarEspacoOcupado(caminhoPasta: string) {
+  try {
+    const storageRef = storage.ref(caminhoPasta);
+    const { items } = await storageRef.listAll();
+    let totalSize = 0;
+    const numeroArquivos = items.length;
+
+    for (const itemRef of items) {
+      const metadata = await itemRef.getMetadata();
+      totalSize += metadata.size;
+    }
+
+    return { espacoOcupado: totalSize, numeroArquivos };
+  } catch (error) {
+    console.error('Erro ao verificar espaço ocupado:', error);
+    throw error;
+  }
+}
+
+

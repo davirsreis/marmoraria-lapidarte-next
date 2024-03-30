@@ -34,7 +34,6 @@ export function whatsAppSubmitForm(nome: string, telefone: string, email: string
   mensagem += `*Descrição do orçamento:* ${descricao}%0a`;
 
   if (urlArquivo) {
-    console.log(urlArquivo);
     mensagem += `*Link para download de arquivos:* ${urlArquivo}%0a`;
   }
 

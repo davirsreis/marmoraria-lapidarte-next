@@ -15,15 +15,26 @@ interface EntradaFormProps {
 }
 
 export function EntradaForm(props: EntradaFormProps) {
-  const style = `w-[350px] smLess:w-[400px] sm:w-[600px] h-[60px] border border-opacity-gray rounded-lg focus:outline-none px-4 py-2 ${props.customClass}`
-  const conteudo = props.textarea
-    ? <textarea
+  const style = `w-[350px] smLess:w-[400px] sm:w-[600px] h-[60px] border border-opacity-gray rounded-lg focus:outline-none px-4 py-2 ${props.customClass}`;
+
+  const validarNome = (valor: string) => {
+    // Remove todos os caracteres que não são letras ou espaços
+    const nomeApenas = valor.replace(/[^A-Za-z\s]/g, '');;
+    props.valorMudou?.(nomeApenas); // Atualiza o valor com apenas letras e espaços
+  };
+  
+  
+
+  const conteudo = props.textarea ? (
+    <textarea
       value={props.valor}
       required={props.required}
       placeholder={props.placeholder}
       className={`${style}`}
-      onChange={e => props.valorMudou?.(e.target.value)} />
-    : <input
+      onChange={e => props.valorMudou?.(e.target.value)}
+    />
+  ) : (
+    <input
       id={props.id}
       type={props.tipo}
       value={props.valor}
@@ -31,21 +42,32 @@ export function EntradaForm(props: EntradaFormProps) {
       placeholder={props.placeholder}
       accept={props.accept}
       multiple={props.multiple}
-      maxLength={props.tipo == 'tel' ? 11 : undefined}
-      onChange={props.tipo == 'tel'
-        ? (e) => { const valorDigitado = e.target.value.replace(/\D/g, ''); props.valorMudou?.(valorDigitado) }
-        : e => props.valorMudou?.(e.target.value)}
-      pattern={props.tipo === 'tel' ? '[0-9]*' : props.tipo === 'email' ? '^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z|a-z]{2,7}$' : undefined}
+      maxLength={props.tipo === 'tel' ? 11 : undefined}
+      onChange={e => {
+        if (props.tipo === 'text' && props.id === 'nome') {
+          validarNome(e.target.value); 
+        } else if (props.tipo === 'tel') {
+          const valorDigitado = e.target.value.replace(/\D/g, '');
+          props.valorMudou?.(valorDigitado);
+        } else {
+          props.valorMudou?.(e.target.value);
+        }
+      }}
       className={`${style}`}
     />
+  );
+
   return (
     <div>
       <label className="flex flex-col">
         <div className="flex">
-          {props.texto}{props.required && <span className="text-red-500">*</span>}<span className="text-opacity-black">{props.textoComplemento}</span>
+          {props.texto}
+          {props.required && <span className="text-red-500">*</span>}
+          <span className="text-opacity-black">{props.textoComplemento}</span>
         </div>
         {conteudo}
       </label>
     </div>
-  )
+  );
 }
+

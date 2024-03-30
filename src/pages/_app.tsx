@@ -32,8 +32,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>{title}</title>
         <link rel="icon" type="image/png" href={linkLogo} />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
       </Head>
       {router.pathname === '/gerenciamento' && (
         <ProtectedRouteGuard>
