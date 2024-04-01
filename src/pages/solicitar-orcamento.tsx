@@ -136,18 +136,18 @@ export default function Orcamento() {
           whatsAppSubmitForm(nome, numeroTelefone, email, descricao, url);
         }
 
-        // setNome('');
-        // setNumeroTelefone('');
-        // setEmail('');
-        // setDescricao('');
-        // setArquivos([]);
+        setNome('');
+        setNumeroTelefone('');
+        setEmail('');
+        setDescricao('');
+        setArquivos([]);
         setProgressPorcent(0);
         setMensagemSucess(['Arquivo enviado com sucesso!', 'success'])
         setEnviandoArquivos(false);
         const fileInput = document.getElementById('fileInput') as HTMLInputElement | null;
-        // if (fileInput) {
-        //   fileInput.value = '';
-        // }
+        if (fileInput) {
+          fileInput.value = '';
+        }
       } catch (error: any) {
         console.error('Erro ao enviar mensagem ou arquivos:', error);
         alert(`Erro ao enviar mensagem ou arquivos: ${error.message}`);
