@@ -18,7 +18,7 @@ export function whatsAppSubmit(mensagem: string) {
   window.open(mensagem, '_blank');
 }
 
-export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string, urlArquivo: string | undefined) {
+export function whatsAppSubmitForm(nome: string, telefone: string, email: string, descricao: string, urlArquivo?: string | undefined) {
   const numeroLoja = process.env.NEXT_PUBLIC_PHONE_NUMBER
   const tipoDeCelular = verificarTipoDispositivo();
 

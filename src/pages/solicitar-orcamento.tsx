@@ -14,8 +14,9 @@ export default function Orcamento() {
   const [descricao, setDescricao] = useState('');
   const [erroFormulario, setErroFormulario] = useState<string | null>(null);
   const [arquivos, setArquivos] = useState<File[]>([]);
-  const [progressPorcent, setPorgessPorcent] = useState(0);
+  const [progressPorcent, setProgressPorcent] = useState(0);
   const [mensagemSucess, setMensagemSucess] = useState<string[]>(['', '']);
+  const [enviandoArquivos, setEnviandoArquivos] = useState(false);
 
   const handleChangeTelefone = (event: any) => {
     const valorDigitado = event.target.value;
@@ -65,7 +66,7 @@ export default function Orcamento() {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
           console.log(`Progresso do upload do arquivo compactado: ${progress}%`);
-          setPorgessPorcent(progress);
+          setProgressPorcent(progress);
         },
         (error) => {
           console.error(`Erro ao enviar o arquivo compactado:`, error);
@@ -87,7 +88,7 @@ export default function Orcamento() {
 
       try {
         if (arquivos.length > 0) {
-
+          setEnviandoArquivos(true);
           const { espacoOcupado, numeroArquivos } = await verificarEspacoOcupado('arquivos');
           const limite = 5 * 1024 * 1024 * 1024 * 0.5;
           const limiteNumeroArquivos = 30;
@@ -111,7 +112,7 @@ export default function Orcamento() {
                       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                     );
                     console.log(`Progresso do upload do arquivo ${file.name}: ${progress}%`);
-                    setPorgessPorcent(progress);
+                    setProgressPorcent(progress);
                   },
                   (error) => {
                     console.error(`Erro ao enviar o arquivo ${file.name}:`, error);
@@ -128,23 +129,29 @@ export default function Orcamento() {
           }
         }
 
-        const url = `https://marmorarialapidarte.com.br/api/baixar-arquivo/${nomeArquivo}`;
-        whatsAppSubmitForm(nome, numeroTelefone, email, descricao, url);
-
-        setNome('');
-        setNumeroTelefone('');
-        setEmail('');
-        setDescricao('');
-        setArquivos([]);
-        setPorgessPorcent(0);
-        setMensagemSucess(['Arquivo enviado com sucesso!', 'success'])
-        const fileInput = document.getElementById('fileInput') as HTMLInputElement | null;
-        if (fileInput) {
-          fileInput.value = '';
+        if (arquivos.length === 0) {
+          whatsAppSubmitForm(nome, numeroTelefone, email, descricao);
+        } else {
+          const url = `https://marmorarialapidarte.com.br/api/baixar-arquivo/${nomeArquivo}`;
+          whatsAppSubmitForm(nome, numeroTelefone, email, descricao, url);
         }
+
+        // setNome('');
+        // setNumeroTelefone('');
+        // setEmail('');
+        // setDescricao('');
+        // setArquivos([]);
+        setProgressPorcent(0);
+        setMensagemSucess(['Arquivo enviado com sucesso!', 'success'])
+        setEnviandoArquivos(false);
+        const fileInput = document.getElementById('fileInput') as HTMLInputElement | null;
+        // if (fileInput) {
+        //   fileInput.value = '';
+        // }
       } catch (error: any) {
         console.error('Erro ao enviar mensagem ou arquivos:', error);
         alert(`Erro ao enviar mensagem ou arquivos: ${error.message}`);
+        setEnviandoArquivos(false);
       }
     }
   }
@@ -173,12 +180,11 @@ export default function Orcamento() {
   }
 
   function handleRemoverArquivo(index: number) {
-    const newArquivos = [...arquivos];
-    newArquivos.splice(index, 1);
-    setArquivos(newArquivos);
+    const novosArquivos = [...arquivos];
+    novosArquivos.splice(index, 1);
+    setArquivos(novosArquivos);
   }
-
-
+  
   return (
     <section className=" pt-[100px] smless:pt-[110px] sm:pt-[120px] pb-[40px] smless:pb-[50px] sm:pb-[60px]" style={{ minHeight: 'calc(100vh - 0px - 60px)' }}>
       <h2 className={`text-[28px] smLess:text-[32px] sm:text-[44px] font-semibold text-center pb-[20px] smLess:pb-[25px] sm:pb-[30px] ${fontePrincipal}`}>Solicitação de orçamento</h2>
@@ -222,9 +228,22 @@ export default function Orcamento() {
         </div>
         <p className="w-[350px] smLess:w-[400px] sm:w-[600px] text-xs sm:text-base">Tipos de arquivo aceitos: jpg, png, pdf ou compactado (rar ou zip) Máx. tamanho do arquivo: 128 MB.</p>
 
-        {progressPorcent != 0 && (
-          <div>
-            {progressPorcent}%
+        {enviandoArquivos && (
+          <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="w-[350px] h-[125px] sm:w-[400px] sm:h-[150px] bg-white p-4 rounded-md flex justify-center items-center">
+              <div className="flex flex-col justify-center items-center gap-2">
+                <p className="text-[20px] animate-pulse font-semibold">Enviando arquivos...</p>
+                <svg className="animate-spin h-6 w-6 mr-3 ..." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#001524" d="M11 1h1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12v-1h2v1a9 9 0 1 0 9-9h-1z" /></svg>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {progressPorcent !== 0 && (
+          <div className="bg-gray-200 rounded w-[350px] smLess:w-[400px] sm:w-[600px] flex">
+            <div className="bg-second-blue text-xs leading-none py-1 text-center text-white rounded" style={{ width: `${progressPorcent}%`, margin: "auto 0" }}>
+              <span className="inline-block w-full text-center">{progressPorcent}%</span>
+            </div>
           </div>
         )}
 
