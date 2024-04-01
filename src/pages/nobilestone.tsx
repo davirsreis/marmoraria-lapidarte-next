@@ -2,7 +2,6 @@ import { ProdutoSeparado } from "@/components/ProdutoSeparado";
 
 export default function NobileStone() {
 
-  
   return (
     <ProdutoSeparado
       nome="NobileStone"

@@ -2,7 +2,6 @@ import { ProdutoSeparado } from "@/components/ProdutoSeparado";
 
 export default function Marmore() {
 
-  
   return (
     <ProdutoSeparado
       nome="Mármores"
