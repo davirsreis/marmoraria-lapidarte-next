@@ -15,17 +15,21 @@ import { useEffect } from "react";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const nomePagina = "Marmoraria Lapidarte";
+  let description = "";
 
   let title = nomePagina;
-  if (router.pathname === '/gerenciamento') {
+  if (router.pathname === '/') {
+    description = "Descubra na Marmoraria Lapidarte uma variedade excepcional de materiais para transformar seus projetos de design. Comece a transformar seus sonhos em realidade hoje mesmo!";
+  } else if (router.pathname === '/produtos') {
+    title = "Produtos - " + nomePagina;
+    description = "Explore nossa coleção de mármores, granitos, quartzitos e nobilestone. Encontre a solução perfeita para o seu projeto em nossa variedade de materiais de alta qualidade.";
+  } else if (router.pathname === '/solicitar-orcamento') {
+    title = "Orçamento - " + nomePagina;
+    description = "Contate nossos consultores na Marmoraria Lapidarte para um orçamento personalizado. Estamos aqui para ajudar. Entre em contato através do número/e-mail ou preencha nosso formulário online.";
+  } else if (router.pathname === '/gerenciamento') {
     title = "Gerenciamento - " + nomePagina;
   } else if (router.pathname === '/login') {
     title = "Login - " + nomePagina;
-  } else if (router.pathname === '/produtos') {
-    title = "Produtos - " + nomePagina;
-  }
-  else if (router.pathname === '/solicitar-orcamento') {
-    title = "Orçamento - " + nomePagina;
   }
 
   useEffect(() => {
@@ -42,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div>
       <Head>
         <title>{title}</title>
+        <meta name="description" content={description} />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCVMVR92L3"></script>
         <script
           dangerouslySetInnerHTML={{

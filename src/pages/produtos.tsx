@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function Produtos() {
+  const [loaded, setLoaded] = useState(false);
   const [dadosProdutos, setDadosProdutos] = useState<any[]>([]);
   const [produtosFiltradosMarmore, setProdutosFiltradosMarmore] = useState<any[]>([]);
   const [produtosFiltradosGranito, setProdutosFiltradosGranito] = useState<any[]>([]);
@@ -34,12 +35,14 @@ export default function Produtos() {
 
       const produtosFiltradosNobileStone = dadosProdutos.filter(produto => produto.pedra === 'NobileStone');
       setProdutosFiltradosNobileStone(produtosFiltradosNobileStone);
+
+      setLoaded(true);
     }
   }, [dadosProdutos]);
 
   return (
     <>
-      {!dados ? (
+      {!loaded ? (
         <Slash />
       ) : (
         <>

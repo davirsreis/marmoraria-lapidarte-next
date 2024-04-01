@@ -39,7 +39,7 @@ export function SectionSobre() {
       <div className="flex flex-col lgPlus:flex-row lgPlus:justify-evenly items-center w-full mx-auto gap-14 smLess:gap-18 sm:gap-20">
         <div className="w-[350px] sm:w-[564px] flex flex-col justify-center sm:items-left">
           <h2 className={`text-center sm:text-left w-[350px] sm:w-[564px] text-primary-gray text-[36px] smLess:text-[38px] sm:text-[48px] font-semibold leading-tight mb-6 ${fontePrincipal}`}>Melhores soluções para o seu projeto!</h2>
-          <p className={`mb-16 text-second-gray`}>Atendimento e serviço especializado, oferecendo uma grande diversidade de mármores.</p>
+          <p className={`mb-16 text-second-gray`}>Atendimento e serviço especializado, oferecendo uma grande diversidade de mármores, granitos, quartzitos e nobilestone.</p>
           <ul className="flex flex-col items-start gap-9">
             <ItemSobre img={'https://firebasestorage.googleapis.com/v0/b/marmoraria-lapidarte.appspot.com/o/imagensDaAplicacao%2FcozinhaIcon2.png?alt=media&token=70bb71bf-8ca8-4408-b5ee-c8b8bd637264'} text="Bancadas de cozinha" customClass="pb-9 border-b-[1px] border-opacity-gray" />
             <ItemSobre img={'https://firebasestorage.googleapis.com/v0/b/marmoraria-lapidarte.appspot.com/o/imagensDaAplicacao%2FbanheiroIcon2.png?alt=media&token=1c697fcb-baec-43c6-8d85-233fdc5fcb50'} text="Banheiros" customClass="pb-9 border-b-[1px] border-opacity-gray" />

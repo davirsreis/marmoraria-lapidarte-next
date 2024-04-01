@@ -1,8 +1,6 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /gerenciamento/
-Disallow: /login/
 
 # Host
 Host: https://marmorarialapidarte.com.br
