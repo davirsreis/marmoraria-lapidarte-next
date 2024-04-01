@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import Login from "./login";
 import Head from "next/head";
 import { linkLogo } from "@/Auxiliares/Valores";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -27,10 +28,31 @@ export default function App({ Component, pageProps }: AppProps) {
     title = "Orçamento - " + nomePagina;
   }
 
+  useEffect(() => {
+    const handleRouteChange = (url: any) => {
+      console.log("Rota alterada para:", url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <div>
       <Head>
         <title>{title}</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCVMVR92L3"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-BCVMVR92L3');
+            `,
+          }}
+        />
         <link rel="icon" type="image/png" href={linkLogo} />
       </Head>
       {router.pathname === '/gerenciamento' && (
