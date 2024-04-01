@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /gerenciamento/
+Disallow: /login/
+
+# Host
+Host: https://marmorarialapidarte.com.br
+
+# Sitemaps
+Sitemap: https://marmorarialapidarte.com.br/sitemap.xml
